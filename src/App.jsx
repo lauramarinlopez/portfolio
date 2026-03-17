@@ -220,6 +220,7 @@ function Footer() {
 // ═══════════════════════════════════════════════════════════════════════════════
 const PROJECTS = [
   { id:"disney-platform",  title:"Disney+ Platform Design",         desc:"Led UX across key product surfaces for a streaming platform with 131M+ subscribers — interaction patterns, component behavior, and experience consistency at scale.", tags:["Product Design","Interaction Design","Design Systems"], bg:"linear-gradient(135deg,#0A1628,#1B2E5A)", span:"wide" },
+  { id:"disney-com",       title:"Disney.com Mobile Redesign",      desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)" },
   { id:"takeovers",        title:"Taylor Swift & Toy Story Takeovers", desc:"Designed immersive, high-stakes UX for two of Disney+'s most visible cultural events — balancing brand fidelity with seamless user flow.",                   tags:["Experience Design","Event UX","Disney+"],             bg:"linear-gradient(135deg,#3D1A4A,#7A3A8A)" },
   { id:"ai-workflow",      title:"AI-Powered Design Workflow",       desc:"Built a rapid prototyping pipeline using Claude, Lovable, and Replit — faster iteration, smarter testing, tighter design-to-dev handoff.",                          tags:["AI Tooling","Prototyping","Figma","ProtoPie"],         bg:"linear-gradient(135deg,#1A3A2A,#2E6B4A)" },
   { id:"second-star",      title:"Second Star Events",               desc:"Founded and led all design for a luxury themed events company — brand, digital experience, and large-scale event design for thousands of guests.",                    tags:["Brand & UX","Experience Design","Founder"],           bg:"linear-gradient(135deg,#3A2010,#7A4A20)" },
@@ -367,6 +368,34 @@ const CASE_STUDIES = [
     outcome:"Contributed to a more cohesive, scalable platform experience used daily by millions. Interaction patterns became part of the broader Disney Streaming design system.",
     metrics:[["131M+","subscribers on platform"],["1 system","shared interaction language"],["2 years","continuous iteration"]],
   },
+  { id:"disney-com",       title:"Disney.com Mobile Redesign",          subtitle:"A brand hub where every scroll feels alive",
+    tags:["Mobile Design","Motion Design","Scroll Interaction","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", year:"2024–2025", role:"Product Designer", duration:"Ongoing", team:"Cross-functional with Engineering, Motion, Brand",
+    overview:"Redesigned the Disney.com mobile experience — a brand hub that surfaces Disney's full portfolio (Disney+, Star Wars, Marvel, Avatar, Nat Geo, ESPN, 20th Century, Hulu) through immersive card-based screens. Both static UX and motion design were in scope: how each brand looks, and exactly how it feels to move between them.",
+    challenge:"Disney.com needs to house dozens of distinct brand identities under one roof, each with its own visual DNA and emotional tone. The mobile redesign had to feel immersive enough to be a destination — not just a directory.",
+    process:[
+      {step:"01",label:"Brand Mapping",     desc:"Created mood boards to explore how Disney's visual identity could be expressed across different emotional territories — 'Enchanted Sky', 'Crystal Wonder', and 'FairyTale Twilight' — each capturing a different facet of what visitors associate with Disney: nostalgia and innovation, family and imagination, magic and wonder.", img:"/portfolio/disney-com-moodboards.jpg"},
+      {step:"02",label:"Interaction Model", desc:"Designed the core swipe-between-cards mechanic. Explored parallax depths, timing curves, and how brand backgrounds should transition — hard cuts vs. cross-fades vs. morphs — and what each communicates emotionally."},
+      {step:"03",label:"Motion Design",     desc:"Annotated every static screen with motion intent: parallax layers, scroll-triggered reveals, ambient brand animations (lantern swing, firefly twinkle, cherry blossoms, ESPN Tron-bar). Partnered with motion designers to translate annotations into timing and easing specs."},
+      {step:"04",label:"Refinement",        desc:"Iterated on sub-nav collapse behavior for more immersive transitions, full-screen expand-on-tap for imagery, and curved section blending as users scroll between content areas."},
+    ],
+    outcome:"A redesigned Disney.com mobile experience where browsing brands feels as magical as the content itself — each brand with its own ambient personality, unified by a coherent motion language.",
+    metrics:[["8+ brands","one interaction system"],["Static + Motion","both fully designed"],["Mobile-first","375px target viewport"]],
+    screens:[
+      {brand:"20th Century", bg:"linear-gradient(170deg,#DEC051 0%,#D8A14F 50%,#A06820 100%)", glow:"#FADE4B", card:"#070205"},
+      {brand:"Star Wars",    bg:"linear-gradient(170deg,#08080F 0%,#12122A 50%,#1A1A35 100%)", glow:"#FFEF88", card:"#050505"},
+      {brand:"Avatar",       bg:"linear-gradient(170deg,#050910 0%,#071525 50%,#0A1F35 100%)", glow:"#0066CC", card:"#050910"},
+      {brand:"Nat Geo",      bg:"linear-gradient(170deg,#1A1200 0%,#2E2000 50%,#3D2A00 100%)", glow:"#FFD700", card:"#0D0900"},
+      {brand:"ESPN",         bg:"linear-gradient(170deg,#0A0A0A 0%,#1A0000 50%,#2A0000 100%)", glow:"#CC0000", card:"#080404"},
+    ],
+    motionNotes:[
+      {label:"Parallax on Swipe",       desc:"Text and hero imagery slide in slightly after the card itself on swipe — layers at different speeds create physical depth. Background imagery has its own independent parallax offset so the world feels larger than the card."},
+      {label:"Cards Rotate into View",  desc:"Cards start slightly angled toward the top and flatten into position as the user scrolls — like a physical card rack spinning into focus. The Disney+ card would begin turned and settle front-and-center as the user lands on it."},
+      {label:"Sub-nav Collapse",        desc:"Explored hiding the fixed sub-nav into the hamburger menu on scroll — reducing chrome and making brand backgrounds more immersive. Could allow for richer section-to-section transitions."},
+      {label:"Curved Section Blends",   desc:"Rather than a flat scroll, each section curls over the previous one — new content emerges from underneath with the curved edge collapsing as it settles. Reference: jomor.design."},
+      {label:"Ambient Brand Details",   desc:"Each brand has its own ambient micro-animation: a lantern that swings, fireflies that twinkle, cherry blossom petals drifting across the screen, animated water blending into the next section as waves."},
+      {label:"ESPN Tron Expand",        desc:"On scroll, the ESPN section briefly expands to full-screen with a speed/glow racetrack animation — think Tron — then collapses on further scroll. High impact, contained moment that makes ESPN feel electric."},
+    ],
+  },
   { id:"takeovers",        title:"Taylor Swift & Toy Story Takeovers",  subtitle:"High-stakes UX for Disney+'s biggest cultural moments",       tags:["Experience Design","Event UX","Disney+"],                         bg:"linear-gradient(135deg,#3D1A4A,#7A3A8A)", year:"2023",      role:"Lead Product Designer",     duration:"8 weeks/event",  team:"Design, Brand, Marketing, Engineering",
     overview:"Designed the end-to-end UX for two of Disney+'s most high-profile platform events — the Taylor Swift Eras Tour film launch and the Toy Story thematic takeover.",
     challenge:"These moments had to feel special and brand-true without breaking the product. Any friction would be amplified by the scale and visibility of the events.",
@@ -480,9 +509,38 @@ function CaseStudyDetail({ cs, onBack }) {
       </div>
 
       <div className="side-pad" style={{ padding:"0 64px 80px" }}>
-        <div style={{ height:440,borderRadius:24,background:cs.bg,display:"flex",alignItems:"center",justifyContent:"center" }}>
-          <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.25)" }}>Add cover image</span>
-        </div>
+        {cs.screens ? (
+          <div style={{ height:440,borderRadius:24,background:cs.bg,display:"flex",alignItems:"flex-end",justifyContent:"center",gap:10,padding:"0 32px",overflow:"hidden",position:"relative" }}>
+            <div style={{ position:"absolute",inset:0,background:"rgba(0,0,0,0.25)" }}/>
+            {cs.screens.map((s,i)=>{
+              const yOff = [50,20,0,20,50][i] || 0;
+              const rot  = [-8,-3,0,3,8][i] || 0;
+              return (
+                <div key={i} style={{ flexShrink:0,width:130,height:280,borderRadius:18,background:s.bg,border:"1px solid rgba(255,255,255,0.18)",boxShadow:`0 0 28px ${s.glow}55, 0 24px 48px rgba(0,0,0,0.6)`,transform:`translateY(${yOff}px) rotate(${rot}deg)`,position:"relative",overflow:"hidden",zIndex:5-Math.abs(i-2) }}>
+                  <div style={{ height:13,background:"rgba(0,0,0,0.45)",display:"flex",alignItems:"center",padding:"0 8px",justifyContent:"space-between" }}>
+                    <span style={{ color:"white",fontSize:5,fontFamily:"sans-serif" }}>9:41</span>
+                    <div style={{ width:9,height:2.5,background:"white",borderRadius:2,opacity:0.7 }}/>
+                  </div>
+                  <div style={{ height:13,background:"rgba(0,0,0,0.22)",display:"flex",alignItems:"center",justifyContent:"center",gap:5,borderBottom:"1px solid rgba(255,255,255,0.1)" }}>
+                    {["D+","Shop","Parks","Movies"].map(item=>(
+                      <span key={item} style={{ color:"rgba(255,255,255,0.85)",fontSize:4,fontFamily:"sans-serif" }}>{item}</span>
+                    ))}
+                  </div>
+                  <div style={{ textAlign:"center",padding:"18px 0 8px",color:"rgba(255,255,255,0.7)",fontSize:5.5,letterSpacing:"0.06em",fontFamily:"sans-serif" }}>Our Brands</div>
+                  <div style={{ margin:"0 9px",borderRadius:11,background:s.card,boxShadow:`0 0 10px ${s.glow}45, inset 0 0 0 1px ${s.glow}28`,padding:"9px",height:130,display:"flex",flexDirection:"column",justifyContent:"space-between",alignItems:"center" }}>
+                    <div style={{ color:"rgba(255,255,255,0.55)",fontSize:5,letterSpacing:"0.06em",textAlign:"center",fontFamily:"sans-serif",marginTop:2 }}>{s.brand}</div>
+                    <div style={{ color:"rgba(255,255,255,0.55)",fontSize:4.5,textAlign:"center",lineHeight:1.5,padding:"0 4px",fontFamily:"sans-serif" }}>Step into the magic</div>
+                    <div style={{ background:"rgba(255,255,255,0.13)",borderRadius:100,padding:"4px 12px",color:"white",fontSize:4.5,fontFamily:"sans-serif" }}>Learn More</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{ height:440,borderRadius:24,background:cs.bg,display:"flex",alignItems:"center",justifyContent:"center" }}>
+            <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.25)" }}>Add cover image</span>
+          </div>
+        )}
       </div>
 
       <Reveal><div className="side-pad three-col" style={{ padding:"0 64px 80px",display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:32 }}>
@@ -515,14 +573,38 @@ function CaseStudyDetail({ cs, onBack }) {
               <div>
                 <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:22,fontWeight:400,color:C.ink,marginBottom:10 }}>{p.label}</p>
                 <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,lineHeight:1.8,maxWidth:640 }}>{p.desc}</p>
-                <div style={{ marginTop:24,height:220,borderRadius:16,background:C.cardA,display:"flex",alignItems:"center",justifyContent:"center" }}>
-                  <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,opacity:0.6 }}>Add process image</span>
+                <div style={{ marginTop:24,height:220,borderRadius:16,background:C.cardA,overflow:"hidden",display:"flex",alignItems:"center",justifyContent:"center" }}>
+                  {p.img
+                    ? <img src={p.img} alt={p.label} style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center top" }}/>
+                    : <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,opacity:0.6 }}>Add process image</span>
+                  }
                 </div>
               </div>
             </div>
           </Reveal>
         ))}
       </div>
+
+      {cs.motionNotes && (
+        <div className="side-pad" style={{ padding:"0 64px 80px" }}>
+          <Reveal>
+            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>Motion Design</p>
+            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,lineHeight:1.85,maxWidth:640,marginBottom:40 }}>
+              Every static screen was annotated with motion intent — defining how the experience should feel in motion, from card parallax to ambient brand animations.
+            </p>
+          </Reveal>
+          <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:16 }}>
+            {cs.motionNotes.map((note,i)=>(
+              <Reveal key={i} delay={i*0.06}>
+                <div style={{ background:C.cardA,borderRadius:16,padding:"26px 30px",borderLeft:`3px solid ${C.rose}`,height:"100%",boxSizing:"border-box" }}>
+                  <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:18,fontWeight:400,color:C.ink,marginBottom:10 }}>{note.label}</p>
+                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,fontWeight:300,color:C.muted,lineHeight:1.78 }}>{note.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="side-pad" style={{ padding:"0 64px 100px" }}>
         <Reveal>
