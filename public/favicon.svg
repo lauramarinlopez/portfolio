@@ -1,0 +1,26 @@
+<svg width="64" height="64" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(0 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(22.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(45 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(67.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(90 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(112.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(135 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(157.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(180 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(202.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(225 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(247.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(270 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(292.5 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#F0C030" opacity="0.9" transform="rotate(315 41 41) translate(0 -16)"/>
+  <ellipse cx="41" cy="41" rx="7" ry="20" fill="#E0A820" opacity="0.9" transform="rotate(337.5 41 41) translate(0 -16)"/>
+  <circle cx="41" cy="41" r="14" fill="#6B3A10"/>
+  <circle cx="41" cy="41" r="10" fill="#7A4418"/>
+  <circle cx="47" cy="41" r="1.5" fill="#3A1A08" opacity="0.7"/>
+  <circle cx="44" cy="46.2" r="1.5" fill="#3A1A08" opacity="0.7"/>
+  <circle cx="38" cy="46.2" r="1.5" fill="#3A1A08" opacity="0.7"/>
+  <circle cx="35" cy="41" r="1.5" fill="#3A1A08" opacity="0.7"/>
+  <circle cx="38" cy="35.8" r="1.5" fill="#3A1A08" opacity="0.7"/>
+  <circle cx="44" cy="35.8" r="1.5" fill="#3A1A08" opacity="0.7"/>
+</svg>
