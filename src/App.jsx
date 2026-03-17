@@ -151,8 +151,8 @@ function Nav() {
 
   const linkStyle = (target) => ({
     fontFamily: "'DM Sans',sans-serif",
-    fontSize: 13,
-    fontWeight: page === target ? 500 : 400,
+    fontSize: 15,
+    fontWeight: 600,
     color: page === target ? C.ink : C.muted,
     textDecoration: "none",
     cursor: "pointer",
@@ -190,7 +190,7 @@ function Nav() {
           Contact
         </button>
         <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer"
-          style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
+          style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
           onMouseEnter={e=>e.currentTarget.style.color=C.ink}
           onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
           Resume ↗
@@ -219,11 +219,7 @@ function Footer() {
 // HOME PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const PROJECTS = [
-  { id:"disney-platform",  title:"Disney+ Platform Design",         desc:"Led UX across key product surfaces for a streaming platform with 131M+ subscribers — interaction patterns, component behavior, and experience consistency at scale.", tags:["Product Design","Interaction Design","Design Systems"], bg:"linear-gradient(135deg,#0A1628,#1B2E5A)", span:"wide" },
-  { id:"disney-com",       title:"Disney.com Mobile Redesign",      desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)" },
-  { id:"takeovers",        title:"Taylor Swift & Toy Story Takeovers", desc:"Designed immersive, high-stakes UX for two of Disney+'s most visible cultural events — balancing brand fidelity with seamless user flow.",                   tags:["Experience Design","Event UX","Disney+"],             bg:"linear-gradient(135deg,#3D1A4A,#7A3A8A)" },
-  { id:"ai-workflow",      title:"AI-Powered Design Workflow",       desc:"Built a rapid prototyping pipeline using Claude, Lovable, and Replit — faster iteration, smarter testing, tighter design-to-dev handoff.",                          tags:["AI Tooling","Prototyping","Figma","ProtoPie"],         bg:"linear-gradient(135deg,#1A3A2A,#2E6B4A)" },
-  { id:"second-star",      title:"Second Star Events",               desc:"Founded and led all design for a luxury themed events company — brand, digital experience, and large-scale event design for thousands of guests.",                    tags:["Brand & UX","Experience Design","Founder"],           bg:"linear-gradient(135deg,#3A2010,#7A4A20)" },
+  { id:"disney-com", title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/disney-com-cover.png" },
 ];
 
 function HomePage() {
@@ -264,7 +260,7 @@ function HomePage() {
             </button>
           </div>
           <div style={{ ...a(0.8),display:"flex",gap:40,marginTop:56 }}>
-            {[["131M+","users reached"],["6+","years experience"],["Columbia","CS graduate"]].map(([num,label])=>(
+            {[["131M+","users reached"],["6+","years experience"],["Columbia University","Computer Science, UX and Applications track"]].map(([num,label])=>(
               <div key={label}>
                 <p style={{ fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:C.ink }}>{num}</p>
                 <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.muted,marginTop:2 }}>{label}</p>
@@ -278,23 +274,6 @@ function HomePage() {
             <FlowerDaisy style={{ position:"absolute",bottom:-14,left:-14,opacity:0.35,transform:"scale(0.75)" }}/>
             <img src="/portfolio/laura.jpg" alt="Laura Marin" style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center top" }}/>
           </div>
-        </div>
-      </section>
-
-      {/* Work preview */}
-      <section id="work" className="side-pad" style={{ padding:"80px 64px 100px" }}>
-        <Reveal>
-          <div style={{ display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:56 }}>
-            <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:"clamp(36px,4vw,56px)",fontWeight:400,color:C.ink }}>Selected Work</h2>
-            <button onClick={()=>go("work")} style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,background:"none",border:"none",cursor:"pointer",transition:"color 0.2s" }}
-              onMouseEnter={e=>e.currentTarget.style.color=C.rose}
-              onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
-              View all →
-            </button>
-          </div>
-        </Reveal>
-        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:20 }}>
-          {PROJECTS.map((p,i)=><HomeProjectCard key={p.id} project={p} delay={i*0.07} onOpen={()=>goWork(p.id)}/>)}
         </div>
       </section>
 
@@ -333,16 +312,19 @@ function HomePage() {
 function HomeProjectCard({ project, delay, onOpen }) {
   const [hov, setHov] = useState(false);
   return (
-    <Reveal delay={delay} style={{ gridColumn:project.span==="wide"?"1 / -1":"auto" }}>
+    <Reveal delay={delay}>
       <div onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)} onClick={onOpen}
         style={{ background:C.cardA,borderRadius:20,overflow:"hidden",cursor:"pointer",transition:"transform 0.3s,box-shadow 0.3s",transform:hov?"translateY(-5px)":"translateY(0)",boxShadow:hov?"0 20px 50px rgba(0,0,0,0.12)":"0 2px 10px rgba(0,0,0,0.05)" }}>
-        <div style={{ height:project.span==="wide"?280:210,background:project.bg,position:"relative",display:"flex",alignItems:"center",justifyContent:"center" }}>
-          <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)" }}>Add project image</span>
+        <div style={{ aspectRatio:"16/9",background:project.bg,position:"relative",display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden" }}>
+          {project.cardImage
+            ? <img src={project.cardImage} alt={project.title} style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center" }}/>
+            : <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)" }}>Add project image</span>
+          }
           {hov && <div style={{ position:"absolute",top:16,right:16,background:"rgba(255,255,255,0.15)",backdropFilter:"blur(8px)",borderRadius:100,padding:"6px 16px",fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"white" }}>View case study →</div>}
         </div>
-        <div style={{ padding:"24px 28px 28px" }}>
-          <h3 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:22,fontWeight:400,fontStyle:"italic",color:C.ink,marginBottom:8 }}>{project.title}</h3>
-          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,fontWeight:300,color:C.muted,lineHeight:1.75,marginBottom:16 }}>{project.desc}</p>
+        <div style={{ padding:"28px 32px 36px" }}>
+          <h3 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:24,fontWeight:400,fontStyle:"italic",color:C.ink,marginBottom:10 }}>{project.title}</h3>
+          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:C.muted,lineHeight:1.75,marginBottom:20 }}>{project.desc}</p>
           <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>
             {project.tags.map(t=><span key={t} style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.pillTxt,background:C.pill,padding:"5px 14px",borderRadius:100 }}>{t}</span>)}
           </div>
@@ -356,83 +338,82 @@ function HomeProjectCard({ project, delay, onOpen }) {
 // WORK PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const CASE_STUDIES = [
-  { id:"disney-platform",  title:"Disney+ Platform Design",            subtitle:"Designing at scale for 131M+ users",                          tags:["Product Design","Interaction Design","Design Systems","Disney+"], bg:"linear-gradient(135deg,#0A1628,#1B2E5A)", year:"2021–Present", role:"Product Designer", duration:"4+ years",    team:"Cross-functional with Engineering, Product & Brand",
-    overview:"Led UX across key product surfaces for Disney+. The work spanned defining new interaction patterns to ensuring consistency across a complex, rapidly evolving design system.",
-    challenge:"At the scale of 131M+ subscribers, even small UX decisions have massive downstream impact. The challenge was balancing business velocity with the quality and consistency users deserved.",
-    process:[
-      {step:"01",label:"Discovery",  desc:"Audited existing patterns across the platform. Identified inconsistencies in interaction behavior and component usage that created friction at scale."},
-      {step:"02",label:"Define",     desc:"Workshopped with Product and Engineering to align on north-star principles for interaction. Established what 'on brand' meant in functional UX terms."},
-      {step:"03",label:"Design",     desc:"Designed and iterated on component behavior, transition logic, and layout systems in Figma. Prototyped key flows in ProtoPie to validate feel before handoff."},
-      {step:"04",label:"Deliver",    desc:"Partnered directly with engineers during implementation. Wrote detailed interaction specs and reviewed builds against prototypes to close design intent gaps."},
+  {
+    id:"disney-com",
+    title:"Disney.com Mobile Redesign",
+    subtitle:"A brand hub where every scroll feels alive",
+    tags:["Mobile Design","Motion Design","Scroll Interaction","Disney"],
+    bg:"linear-gradient(135deg,#3D1A00,#8B4500)",
+    year:"2024–2025",
+    role:"Product Designer",
+    platform:"Mobile Web",
+    contribution:"Interaction Design, Motion Design, Prototyping",
+    heroImage:"/disney-com-cover.png",
+    cardImage:"/disney-com-cover.png",
+    overview:"Redesigned Disney.com for mobile to create a more engaging, delightful, and motion-enhanced experience that reflects the magic of the brand. I translated static high-fidelity comps into functional interactive prototypes, identified key moments to enhance with motion, and worked closely with engineering to define motion documentation for handoff.",
+    metrics:[["8+ brands","one interaction system"],["Static + Motion","fully designed"],["375px","mobile-first target"]],
+    gallery:[
+      { label:"Brand Cards", desc:"", images:["/portfolio/disney-com-moodboards.jpg"] },
+      { label:"Motion & Interaction", desc:"", images:[] },
     ],
-    outcome:"Contributed to a more cohesive, scalable platform experience used daily by millions. Interaction patterns became part of the broader Disney Streaming design system.",
-    metrics:[["131M+","subscribers on platform"],["1 system","shared interaction language"],["2 years","continuous iteration"]],
-  },
-  { id:"disney-com",       title:"Disney.com Mobile Redesign",          subtitle:"A brand hub where every scroll feels alive",
-    tags:["Mobile Design","Motion Design","Scroll Interaction","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", year:"2024–2025", role:"Product Designer", duration:"Ongoing", team:"Cross-functional with Engineering, Motion, Brand",
-    overview:"Redesigned the Disney.com mobile experience — a brand hub that surfaces Disney's full portfolio (Disney+, Star Wars, Marvel, Avatar, Nat Geo, ESPN, 20th Century, Hulu) through immersive card-based screens. Both static UX and motion design were in scope: how each brand looks, and exactly how it feels to move between them.",
-    challenge:"Disney.com needs to house dozens of distinct brand identities under one roof, each with its own visual DNA and emotional tone. The mobile redesign had to feel immersive enough to be a destination — not just a directory.",
-    process:[
-      {step:"01",label:"Brand Mapping",     desc:"Created mood boards to explore how Disney's visual identity could be expressed across different emotional territories — 'Enchanted Sky', 'Crystal Wonder', and 'FairyTale Twilight' — each capturing a different facet of what visitors associate with Disney: nostalgia and innovation, family and imagination, magic and wonder.", img:"/portfolio/disney-com-moodboards.jpg"},
-      {step:"02",label:"Interaction Model", desc:"Designed the core swipe-between-cards mechanic. Explored parallax depths, timing curves, and how brand backgrounds should transition — hard cuts vs. cross-fades vs. morphs — and what each communicates emotionally."},
-      {step:"03",label:"Motion Design",     desc:"Annotated every static screen with motion intent: parallax layers, scroll-triggered reveals, ambient brand animations (lantern swing, firefly twinkle, cherry blossoms, ESPN Tron-bar). Partnered with motion designers to translate annotations into timing and easing specs."},
-      {step:"04",label:"Refinement",        desc:"Iterated on sub-nav collapse behavior for more immersive transitions, full-screen expand-on-tap for imagery, and curved section blending as users scroll between content areas."},
+    impact:[
+      { color:"#4A7B9D", text:"Elevated brand storytelling through subtle, narrative-driven motion that reinforced Disney's emotional tone" },
+      { color:"#A0522D", text:"Helped leadership see motion as a brand signature — not just a design flourish" },
+      { color:"#6A8A5A", text:"Strengthened cross-functional relationships between visual design, product, and engineering" },
+      { color:"#8A6A9A", text:"Designed both static UX and motion end-to-end across 8+ brand identities" },
     ],
-    outcome:"A redesigned Disney.com mobile experience where browsing brands feels as magical as the content itself — each brand with its own ambient personality, unified by a coherent motion language.",
-    metrics:[["8+ brands","one interaction system"],["Static + Motion","both fully designed"],["Mobile-first","375px target viewport"]],
-    screens:[
-      {brand:"20th Century", bg:"linear-gradient(170deg,#DEC051 0%,#D8A14F 50%,#A06820 100%)", glow:"#FADE4B", card:"#070205"},
-      {brand:"Star Wars",    bg:"linear-gradient(170deg,#08080F 0%,#12122A 50%,#1A1A35 100%)", glow:"#FFEF88", card:"#050505"},
-      {brand:"Avatar",       bg:"linear-gradient(170deg,#050910 0%,#071525 50%,#0A1F35 100%)", glow:"#0066CC", card:"#050910"},
-      {brand:"Nat Geo",      bg:"linear-gradient(170deg,#1A1200 0%,#2E2000 50%,#3D2A00 100%)", glow:"#FFD700", card:"#0D0900"},
-      {brand:"ESPN",         bg:"linear-gradient(170deg,#0A0A0A 0%,#1A0000 50%,#2A0000 100%)", glow:"#CC0000", card:"#080404"},
-    ],
-    motionNotes:[
-      {label:"Parallax on Swipe",       desc:"Text and hero imagery slide in slightly after the card itself on swipe — layers at different speeds create physical depth. Background imagery has its own independent parallax offset so the world feels larger than the card."},
-      {label:"Cards Rotate into View",  desc:"Cards start slightly angled toward the top and flatten into position as the user scrolls — like a physical card rack spinning into focus. The Disney+ card would begin turned and settle front-and-center as the user lands on it."},
-      {label:"Sub-nav Collapse",        desc:"Explored hiding the fixed sub-nav into the hamburger menu on scroll — reducing chrome and making brand backgrounds more immersive. Could allow for richer section-to-section transitions."},
-      {label:"Curved Section Blends",   desc:"Rather than a flat scroll, each section curls over the previous one — new content emerges from underneath with the curved edge collapsing as it settles. Reference: jomor.design."},
-      {label:"Ambient Brand Details",   desc:"Each brand has its own ambient micro-animation: a lantern that swings, fireflies that twinkle, cherry blossom petals drifting across the screen, animated water blending into the next section as waves."},
-      {label:"ESPN Tron Expand",        desc:"On scroll, the ESPN section briefly expands to full-screen with a speed/glow racetrack animation — think Tron — then collapses on further scroll. High impact, contained moment that makes ESPN feel electric."},
-    ],
-  },
-  { id:"takeovers",        title:"Taylor Swift & Toy Story Takeovers",  subtitle:"High-stakes UX for Disney+'s biggest cultural moments",       tags:["Experience Design","Event UX","Disney+"],                         bg:"linear-gradient(135deg,#3D1A4A,#7A3A8A)", year:"2023",      role:"Lead Product Designer",     duration:"8 weeks/event",  team:"Design, Brand, Marketing, Engineering",
-    overview:"Designed the end-to-end UX for two of Disney+'s most high-profile platform events — the Taylor Swift Eras Tour film launch and the Toy Story thematic takeover.",
-    challenge:"These moments had to feel special and brand-true without breaking the product. Any friction would be amplified by the scale and visibility of the events.",
-    process:[
-      {step:"01",label:"Brief & Align", desc:"Collaborated with Brand and Marketing to understand the creative vision. Translated marketing goals into UX requirements."},
-      {step:"02",label:"Explore",       desc:"Explored a range of takeover concepts from subtle theming to bold contextual overrides. Tested against real user journeys to find the right balance."},
-      {step:"03",label:"Prototype",     desc:"Built high-fidelity prototypes in ProtoPie to simulate the full experience — transitions, motion, and ambient effects — for stakeholder alignment."},
-      {step:"04",label:"Launch",        desc:"Worked closely with engineering on phased rollout. Monitored behavior post-launch and iterated quickly on friction points before peak traffic."},
-    ],
-    outcome:"Both events launched on time and drove significant engagement spikes. The Eras Tour experience became one of the most-discussed Disney+ product moments of the year.",
-    metrics:[["2 events","designed & shipped"],["8 weeks","design-to-launch"],["#1","trending on launch day"]],
-  },
-  { id:"ai-workflow",      title:"AI-Powered Design Workflow",          subtitle:"Prototyping faster with AI-native tools",                     tags:["AI Tooling","Prototyping","Figma","ProtoPie"],                    bg:"linear-gradient(135deg,#1A3A2A,#2E6B4A)", year:"2024–Now",  role:"Lead Designer",             duration:"Ongoing",        team:"Solo + Cross-functional",
-    overview:"Built a personal design workflow integrating Claude, Lovable, and Replit alongside Figma and ProtoPie to close the gap between ideation and testable prototype.",
-    challenge:"Traditional design-to-prototype pipelines create a slow feedback loop. The opportunity was to validate ideas earlier, at higher fidelity, without a full engineering sprint.",
-    process:[
-      {step:"01",label:"Tool Audit",      desc:"Evaluated AI-native tools for design utility — which accelerated ideation, which were best for testable prototypes, how each integrated with Figma."},
-      {step:"02",label:"Workflow Design", desc:"Designed the workflow itself as a UX problem — mapping stages from concept sketch to testable build and identifying where AI tools compress each."},
-      {step:"03",label:"Iterate",         desc:"Ran the workflow on real projects. Documented learnings, refined handoff prompts, and built a library of reusable patterns and component starters."},
-      {step:"04",label:"Share",           desc:"Socialized the approach with cross-functional partners so engineers and PMs could engage earlier when high-fidelity prototypes were available sooner."},
-    ],
-    outcome:"Reduced time from concept to testable prototype by ~60%. More design decisions validated with real users before engineering investment.",
-    metrics:[["~60%","faster to prototype"],["3 tools","integrated"],["Earlier","user validation"]],
-  },
-  { id:"second-star",      title:"Second Star Events",                  subtitle:"Building a brand & experience from scratch",                  tags:["Brand & UX","Experience Design","Founder"],                      bg:"linear-gradient(135deg,#3A2010,#7A4A20)", year:"2020–Now",  role:"Founder & Creative Director",duration:"4+ years",       team:"Founding team of 3",
-    overview:"Founded Second Star Events, a luxury themed events company producing large-scale immersive experiences for thousands of guests across multiple U.S. cities.",
-    challenge:"Building a brand that could compete with established event companies while staying true to a bold, whimsical creative vision — with a lean team and without compromising the guest experience.",
-    process:[
-      {step:"01",label:"Brand Foundation",  desc:"Developed the brand from scratch — name, identity, voice, and positioning to attract both guests who wanted magic and corporate partners who needed reliability."},
-      {step:"02",label:"Experience Design", desc:"Designed the end-to-end guest journey — digital touchpoints (website, ticketing, email) through physical wayfinding, theming, and in-event moments."},
-      {step:"03",label:"Digital Presence",  desc:"Built and iterated on the website and partner-facing materials. Applied UX research to optimize conversion and reduce friction in the ticketing flow."},
-      {step:"04",label:"Scale & Partner",   desc:"Grew to produce events for thousands of guests. Secured partnerships with Leftfield Media/AwesomeCon. Launched the Neverland Foundation."},
-    ],
-    outcome:"Second Star Events is now an established name in luxury themed experiences, with a community impact arm and national partnerships.",
-    metrics:[["1000s","guests per event"],["4+ years","in operation"],["National","U.S. partnerships"]],
   },
 ];
+
+const WORK_PASSWORD = "LM26";
+
+function PasswordGate({ onUnlock }) {
+  const [val, setVal] = useState("");
+  const [err, setErr] = useState(false);
+  const [shake, setShake] = useState(false);
+
+  function attempt() {
+    if (val === WORK_PASSWORD) {
+      onUnlock();
+    } else {
+      setErr(true);
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+    }
+  }
+
+  return (
+    <div style={{ minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:"0 24px" }}>
+      <div style={{ textAlign:"center",maxWidth:380,width:"100%" }}>
+        <FlowerDaisy style={{ margin:"0 auto 32px",display:"block" }}/>
+        <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(28px,4vw,40px)",color:C.ink,marginBottom:12 }}>
+          This work is private.
+        </h2>
+        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:C.muted,lineHeight:1.75,marginBottom:36 }}>
+          Enter the password to view my projects.
+        </p>
+        <div style={{ animation:shake?"shake 0.4s ease":"none" }}>
+          <style>{`@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}`}</style>
+          <input
+            type="password"
+            value={val}
+            onChange={e=>{setVal(e.target.value);setErr(false);}}
+            onKeyDown={e=>e.key==="Enter"&&attempt()}
+            placeholder="Password"
+            style={{ width:"100%",boxSizing:"border-box",padding:"13px 20px",borderRadius:100,border:`1.5px solid ${err?C.rose:C.pill}`,background:"white",fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink,outline:"none",marginBottom:12,transition:"border-color 0.2s" }}
+          />
+          {err && <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.rose,marginBottom:12 }}>Incorrect password. Try again.</p>}
+          <button onClick={attempt}
+            style={{ width:"100%",padding:"13px",borderRadius:100,background:C.ink,color:"#FAF8F4",fontFamily:"'DM Sans',sans-serif",fontSize:14,fontWeight:500,border:"none",cursor:"pointer",transition:"background 0.2s" }}
+            onMouseEnter={e=>e.currentTarget.style.background=C.rose}
+            onMouseLeave={e=>e.currentTarget.style.background=C.ink}>
+            View work →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function WorkPage() {
   const { workId, goWork } = useRouter();
@@ -455,8 +436,8 @@ function WorkIndex({ onSelect }) {
       </div>
       <div className="side-pad" style={{ padding:"0 64px 100px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:20 }}>
         {CASE_STUDIES.map((cs,i)=>(
-          <Reveal key={cs.id} delay={i*0.07} style={{ gridColumn:i===0?"1 / -1":"auto" }}>
-            <WorkCard cs={cs} wide={i===0} onSelect={onSelect}/>
+          <Reveal key={cs.id} delay={i*0.07}>
+            <WorkCard cs={cs} onSelect={onSelect}/>
           </Reveal>
         ))}
       </div>
@@ -470,14 +451,16 @@ function WorkCard({ cs, wide, onSelect }) {
   return (
     <div onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)} onClick={()=>onSelect(cs.id)}
       style={{ background:C.cardA,borderRadius:20,overflow:"hidden",cursor:"pointer",transition:"transform 0.3s,box-shadow 0.3s",transform:hov?"translateY(-5px)":"translateY(0)",boxShadow:hov?"0 20px 50px rgba(0,0,0,0.12)":"0 2px 10px rgba(0,0,0,0.05)" }}>
-      <div style={{ height:wide?300:220,background:cs.bg,position:"relative",display:"flex",alignItems:"center",justifyContent:"center" }}>
-        <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)" }}>Add project image</span>
+      <div style={{ aspectRatio:"16/9",background:cs.bg,position:"relative",display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden" }}>
+        {cs.cardImage
+          ? <img src={cs.cardImage} alt={cs.title} style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center" }}/>
+          : <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)" }}>Add project image</span>
+        }
         {hov && <div style={{ position:"absolute",top:16,right:16,background:"rgba(255,255,255,0.15)",backdropFilter:"blur(8px)",borderRadius:100,padding:"6px 16px",fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"white" }}>View case study →</div>}
-        <span style={{ position:"absolute",bottom:16,left:20,fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"rgba(255,255,255,0.5)" }}>{cs.year}</span>
       </div>
-      <div style={{ padding:"24px 28px 30px" }}>
-        <h3 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:22,fontWeight:400,fontStyle:"italic",color:C.ink,marginBottom:8 }}>{cs.title}</h3>
-        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,fontWeight:300,color:C.muted,lineHeight:1.7,marginBottom:16 }}>{cs.subtitle}</p>
+      <div style={{ padding:"28px 32px 36px" }}>
+        <h3 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:24,fontWeight:400,fontStyle:"italic",color:C.ink,marginBottom:10 }}>{cs.title}</h3>
+        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:C.muted,lineHeight:1.75,marginBottom:20 }}>{cs.subtitle}</p>
         <div style={{ display:"flex",flexWrap:"wrap",gap:8 }}>
           {cs.tags.map(t=><span key={t} style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.pillTxt,background:C.pill,padding:"5px 14px",borderRadius:100 }}>{t}</span>)}
         </div>
@@ -488,146 +471,118 @@ function WorkCard({ cs, wide, onSelect }) {
 
 function CaseStudyDetail({ cs, onBack }) {
   const a = (d) => ({ opacity:0, animation:`fadeUp 0.7s ease ${d}s forwards` });
-  const { go } = useRouter();
   const nextCs = CASE_STUDIES[(CASE_STUDIES.findIndex(c=>c.id===cs.id)+1) % CASE_STUDIES.length];
 
   return (
     <div className="page-enter">
-      <div className="side-pad" style={{ padding:"120px 64px 80px",position:"relative",overflow:"hidden" }}>
-        <FlowerDaisy style={{ position:"absolute",top:100,right:0,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>
+
+      {/* ── Header ── */}
+      <div className="side-pad" style={{ padding:"120px 64px 48px",position:"relative",overflow:"hidden" }}>
+        <FlowerDaisy style={{ position:"absolute",top:100,right:0,opacity:0.08,transform:"scale(3)",pointerEvents:"none" }}/>
         <button onClick={onBack} style={{ ...a(0.05),fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,background:"none",border:"none",cursor:"pointer",marginBottom:32,display:"block",transition:"color 0.2s" }}
           onMouseEnter={e=>e.currentTarget.style.color=C.ink}
           onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
           ← All work
         </button>
-        <p style={{ ...a(0.1),fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>{cs.year} · {cs.role}</p>
-        <h1 style={{ ...a(0.25),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(40px,5vw,72px)",color:C.ink,lineHeight:1.1,marginBottom:16,maxWidth:800 }}>{cs.title}</h1>
-        <p style={{ ...a(0.35),fontFamily:"'DM Sans',sans-serif",fontSize:20,fontWeight:300,color:C.muted,marginBottom:32 }}>{cs.subtitle}</p>
-        <div style={{ ...a(0.45),display:"flex",flexWrap:"wrap",gap:8 }}>
-          {cs.tags.map(t=><span key={t} style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.pillTxt,background:C.pill,padding:"5px 14px",borderRadius:100 }}>{t}</span>)}
+        <h1 style={{ ...a(0.2),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(40px,5vw,72px)",color:C.ink,lineHeight:1.1,maxWidth:860 }}>{cs.title}</h1>
+      </div>
+
+      {/* ── Hero image ── */}
+      <div className="side-pad" style={{ padding:"0 64px 72px" }}>
+        <div style={{ borderRadius:24,overflow:"hidden",background:cs.bg,minHeight:480,display:"flex",alignItems:"center",justifyContent:"center",position:"relative" }}>
+          {cs.heroImage
+            ? <img src={cs.heroImage} alt={cs.title} style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
+            : <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)" }}>Add hero image</span>
+          }
         </div>
       </div>
 
-      <div className="side-pad" style={{ padding:"0 64px 80px" }}>
-        {cs.screens ? (
-          <div style={{ height:440,borderRadius:24,background:cs.bg,display:"flex",alignItems:"flex-end",justifyContent:"center",gap:10,padding:"0 32px",overflow:"hidden",position:"relative" }}>
-            <div style={{ position:"absolute",inset:0,background:"rgba(0,0,0,0.25)" }}/>
-            {cs.screens.map((s,i)=>{
-              const yOff = [50,20,0,20,50][i] || 0;
-              const rot  = [-8,-3,0,3,8][i] || 0;
-              return (
-                <div key={i} style={{ flexShrink:0,width:130,height:280,borderRadius:18,background:s.bg,border:"1px solid rgba(255,255,255,0.18)",boxShadow:`0 0 28px ${s.glow}55, 0 24px 48px rgba(0,0,0,0.6)`,transform:`translateY(${yOff}px) rotate(${rot}deg)`,position:"relative",overflow:"hidden",zIndex:5-Math.abs(i-2) }}>
-                  <div style={{ height:13,background:"rgba(0,0,0,0.45)",display:"flex",alignItems:"center",padding:"0 8px",justifyContent:"space-between" }}>
-                    <span style={{ color:"white",fontSize:5,fontFamily:"sans-serif" }}>9:41</span>
-                    <div style={{ width:9,height:2.5,background:"white",borderRadius:2,opacity:0.7 }}/>
-                  </div>
-                  <div style={{ height:13,background:"rgba(0,0,0,0.22)",display:"flex",alignItems:"center",justifyContent:"center",gap:5,borderBottom:"1px solid rgba(255,255,255,0.1)" }}>
-                    {["D+","Shop","Parks","Movies"].map(item=>(
-                      <span key={item} style={{ color:"rgba(255,255,255,0.85)",fontSize:4,fontFamily:"sans-serif" }}>{item}</span>
-                    ))}
-                  </div>
-                  <div style={{ textAlign:"center",padding:"18px 0 8px",color:"rgba(255,255,255,0.7)",fontSize:5.5,letterSpacing:"0.06em",fontFamily:"sans-serif" }}>Our Brands</div>
-                  <div style={{ margin:"0 9px",borderRadius:11,background:s.card,boxShadow:`0 0 10px ${s.glow}45, inset 0 0 0 1px ${s.glow}28`,padding:"9px",height:130,display:"flex",flexDirection:"column",justifyContent:"space-between",alignItems:"center" }}>
-                    <div style={{ color:"rgba(255,255,255,0.55)",fontSize:5,letterSpacing:"0.06em",textAlign:"center",fontFamily:"sans-serif",marginTop:2 }}>{s.brand}</div>
-                    <div style={{ color:"rgba(255,255,255,0.55)",fontSize:4.5,textAlign:"center",lineHeight:1.5,padding:"0 4px",fontFamily:"sans-serif" }}>Step into the magic</div>
-                    <div style={{ background:"rgba(255,255,255,0.13)",borderRadius:100,padding:"4px 12px",color:"white",fontSize:4.5,fontFamily:"sans-serif" }}>Learn More</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div style={{ height:440,borderRadius:24,background:cs.bg,display:"flex",alignItems:"center",justifyContent:"center" }}>
-            <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.25)" }}>Add cover image</span>
-          </div>
-        )}
-      </div>
-
-      <Reveal><div className="side-pad three-col" style={{ padding:"0 64px 80px",display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:32 }}>
-        {[["Role",cs.role],["Duration",cs.duration],["Team",cs.team]].map(([label,val])=>(
-          <div key={label} style={{ borderTop:`1px solid ${C.pill}`,paddingTop:20 }}>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,marginBottom:8 }}>{label}</p>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink }}>{val}</p>
-          </div>
-        ))}
-      </div></Reveal>
-
-      <Reveal><div className="side-pad" style={{ padding:"0 64px 80px",maxWidth:800 }}>
-        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:20 }}>Overview</p>
-        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(17px,1.9vw,21px)",fontWeight:300,color:"#4A4438",lineHeight:1.9 }}>{cs.overview}</p>
-      </div></Reveal>
-
-      <Reveal><div className="side-pad" style={{ padding:"64px 64px",background:C.cardA,marginBottom:80 }}>
-        <div style={{ maxWidth:800 }}>
-          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:20 }}>The Challenge</p>
-          <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:"clamp(20px,2.4vw,30px)",fontWeight:400,color:C.ink,lineHeight:1.7 }}>"{cs.challenge}"</p>
-        </div>
-      </div></Reveal>
-
-      <div className="side-pad" style={{ padding:"0 64px 80px" }}>
-        <Reveal><p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:48 }}>Process</p></Reveal>
-        {cs.process.map((p,i)=>(
-          <Reveal key={i} delay={i*0.08}>
-            <div style={{ display:"grid",gridTemplateColumns:"72px 1fr",gap:32,paddingBottom:48,borderBottom:i<cs.process.length-1?`1px solid ${C.pill}`:"none",marginBottom:i<cs.process.length-1?48:0 }}>
-              <p style={{ fontFamily:"'Playfair Display',serif",fontStyle:"italic",fontSize:28,fontWeight:400,color:C.pill,paddingTop:4 }}>{p.step}</p>
-              <div>
-                <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:22,fontWeight:400,color:C.ink,marginBottom:10 }}>{p.label}</p>
-                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,lineHeight:1.8,maxWidth:640 }}>{p.desc}</p>
-                <div style={{ marginTop:24,height:220,borderRadius:16,background:C.cardA,overflow:"hidden",display:"flex",alignItems:"center",justifyContent:"center" }}>
-                  {p.img
-                    ? <img src={p.img} alt={p.label} style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center top" }}/>
-                    : <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,opacity:0.6 }}>Add process image</span>
-                  }
-                </div>
+      {/* ── Meta sidebar + Overview ── */}
+      <Reveal>
+        <div className="side-pad" style={{ padding:"56px 64px 100px",display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"center" }}>
+          {/* Left: role / platform / contribution */}
+          <div style={{ display:"flex",flexDirection:"column",gap:52 }}>
+            {[
+              ["ROLE",         cs.role,         C.rose],
+              ["PLATFORM",     cs.platform,     "#4A7B9D"],
+              ["CONTRIBUTION", cs.contribution, "#6A8A5A"],
+            ].map(([label,val,color])=>(
+              <div key={label}>
+                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:10 }}>{label}</p>
+                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink,lineHeight:1.65 }}>{val}</p>
               </div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-
-      {cs.motionNotes && (
-        <div className="side-pad" style={{ padding:"0 64px 80px" }}>
-          <Reveal>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>Motion Design</p>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,lineHeight:1.85,maxWidth:640,marginBottom:40 }}>
-              Every static screen was annotated with motion intent — defining how the experience should feel in motion, from card parallax to ambient brand animations.
-            </p>
-          </Reveal>
-          <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:16 }}>
-            {cs.motionNotes.map((note,i)=>(
-              <Reveal key={i} delay={i*0.06}>
-                <div style={{ background:C.cardA,borderRadius:16,padding:"26px 30px",borderLeft:`3px solid ${C.rose}`,height:"100%",boxSizing:"border-box" }}>
-                  <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:18,fontWeight:400,color:C.ink,marginBottom:10 }}>{note.label}</p>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,fontWeight:300,color:C.muted,lineHeight:1.78 }}>{note.desc}</p>
-                </div>
-              </Reveal>
             ))}
           </div>
-        </div>
-      )}
-
-      <div className="side-pad" style={{ padding:"0 64px 100px" }}>
-        <Reveal>
-          <div style={{ background:C.cardA,borderRadius:24,padding:"56px 64px" }}>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:20 }}>Outcome</p>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(16px,1.7vw,19px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,maxWidth:720,marginBottom:48 }}>{cs.outcome}</p>
-            <div className="three-col" style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:32 }}>
+          {/* Right: overview text + metrics */}
+          <div>
+            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(16px,1.7vw,19px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:48 }}>{cs.overview}</p>
+            <div style={{ display:"flex",gap:40,flexWrap:"wrap" }}>
               {cs.metrics.map(([num,label])=>(
-                <div key={label} style={{ borderTop:`2px solid ${C.rose}`,paddingTop:20 }}>
-                  <p style={{ fontFamily:"'Playfair Display',serif",fontSize:32,fontWeight:700,color:C.ink,marginBottom:6 }}>{num}</p>
+                <div key={label} style={{ borderTop:`2px solid ${C.rose}`,paddingTop:16,minWidth:100 }}>
+                  <p style={{ fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:700,color:C.ink,marginBottom:4 }}>{num}</p>
                   <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted }}>{label}</p>
                 </div>
               ))}
             </div>
           </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
 
-      {/* Next project */}
-      <Reveal><div className="side-pad" style={{ padding:"0 64px 80px" }}>
-        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.muted,marginBottom:24 }}>Next Project</p>
-        <NextProjectCard cs={nextCs}/>
-      </div></Reveal>
+      {/* ── Gallery sections ── */}
+      {cs.gallery && cs.gallery.map((section,si)=>(
+        <Reveal key={si}>
+          <div className="side-pad" style={{ padding:"0 64px 72px" }}>
+            {section.label && (
+              <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
+            )}
+            {section.images && section.images.length > 0 ? (
+              <div style={{ display:"grid",gridTemplateColumns:section.images.length===1?"1fr":section.images.length===2?"1fr 1fr":"repeat(3,1fr)",gap:16 }}>
+                {section.images.map((img,ii)=>(
+                  <div key={ii} style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:section.images.length===1?"16/9":"4/3" }}>
+                    <img src={img} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ borderRadius:16,background:C.cardA,aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center" }}>
+                <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,opacity:0.5 }}>Add images</span>
+              </div>
+            )}
+            {section.desc && (
+              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:C.muted,maxWidth:680,lineHeight:1.8,marginTop:20 }}>{section.desc}</p>
+            )}
+          </div>
+        </Reveal>
+      ))}
+
+      {/* ── Impact ── */}
+      {cs.impact && (
+        <Reveal>
+          <div className="side-pad" style={{ padding:"0 64px 96px",display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start" }}>
+            <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(28px,3vw,40px)",color:C.ink }}>Impact</h2>
+            <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:0 }}>
+              {cs.impact.map((item,i)=>{
+                const isLeft = i % 2 === 0;
+                const isTop  = i < 2;
+                return (
+                  <div key={i} style={{ padding:"32px 40px 32px 0",borderBottom:isTop?`1px dashed ${C.pill}`:"none",borderRight:isLeft?`1px dashed ${C.pill}`:"none",paddingRight:isLeft?40:0,paddingLeft:isLeft?0:40 }}>
+                    <div style={{ width:44,height:44,borderRadius:"50%",background:item.color,marginBottom:16 }}/>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink,lineHeight:1.75,maxWidth:280 }}>{item.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
+      )}
+
+      {/* ── Next project ── */}
+      <Reveal>
+        <div className="side-pad" style={{ padding:"0 64px 80px" }}>
+          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.muted,marginBottom:24 }}>Next Project</p>
+          <NextProjectCard cs={nextCs}/>
+        </div>
+      </Reveal>
 
       <Footer/>
     </div>
@@ -666,7 +621,7 @@ const VALUES = [
 ];
 const EXPERIENCE = [
   { company:"Disney Streaming",               role:"Product Designer",                  period:"May 2021–Present", desc:"Design and prototype high-fidelity living room, mobile, and web experiences for Disney+, Hulu, and ESPN+ — spanning motion systems, design infrastructure, AI-powered prototyping workflows, and marquee in-app moments for 131M+ subscribers globally." },
-  { company:"Napster (formerly Infinite Reality)", role:"Product Designer (Contract)",   period:"Sep 2025",         desc:"Designed rich interactive experiences for Napster's web and mobile platforms. Built design systems with 100+ unified components for Napster Spaces and Companion. Worked directly with the CTO on a complete brand redesign." },
+  { company:"Napster (formerly Infinite Reality)", role:"Product Designer (Contract)",   period:"Sep 2025–Sep 2026",         desc:"Designed rich interactive experiences for Napster's web and mobile platforms. Built design systems with 100+ unified components for Napster Spaces and Companion. Worked directly with the CTO on a complete brand redesign." },
   { company:"Anywhere",                       role:"Full-Stack UX Designer (Contract)", period:"Mar 2022–Mar 2023", desc:"Led mobile and web UX for multiple B2B products used by 49,000+ agents across Anywhere's brand portfolio. Designed a mobile onboarding experience now deployed to 200,000+ agents." },
 ];
 
@@ -885,25 +840,41 @@ function ContactPage() {
 export default function App() {
   const [page, setPage]   = useState("home"); // "home" | "work" | "about" | "contact"
   const [workId, setWorkId] = useState(null);
+  const [unlocked, setUnlocked] = useState(false);
 
   const go = (target) => {
+    window.history.pushState({ page: target, workId: null }, "");
     setWorkId(null);
     setPage(target);
+    if (target !== "work") setUnlocked(false);
     window.scrollTo({ top:0, behavior:"smooth" });
   };
 
   const goWork = (id) => {
+    window.history.pushState({ page: "work", workId: id }, "");
     setWorkId(id);
     setPage("work");
     window.scrollTo({ top:0, behavior:"smooth" });
   };
+
+  useEffect(() => {
+    const onPop = (e) => {
+      const state = e.state;
+      if (!state) return;
+      setPage(state.page);
+      setWorkId(state.workId ?? null);
+      window.scrollTo({ top:0, behavior:"smooth" });
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   return (
     <RouterContext.Provider value={{ page, go, workId, goWork }}>
       <style>{G}</style>
       <Nav/>
       {page === "home"    && <HomePage/>}
-      {page === "work"    && <WorkPage/>}
+      {page === "work"    && (unlocked ? <WorkPage/> : <PasswordGate onUnlock={()=>setUnlocked(true)}/>)}
       {page === "about"   && <AboutPage/>}
       {page === "contact" && <ContactPage/>}
     </RouterContext.Provider>
