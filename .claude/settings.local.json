@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh --version)",
+      "Bash(winget install:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(git clone:*)",
+      "Bash(npm install:*)",
+      "Skill(update-config)",
+      "mcp__figma__get_design_context",
+      "Bash(git add:*)"
+    ]
+  }
+}

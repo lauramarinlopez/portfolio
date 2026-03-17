@@ -189,11 +189,11 @@ function Nav() {
           onMouseLeave={e=>{ if(page!=="contact") e.currentTarget.style.color=C.muted; }}>
           Contact
         </button>
-        <a href="https://second-star.events" target="_blank" rel="noreferrer"
+        <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer"
           style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
           onMouseEnter={e=>e.currentTarget.style.color=C.ink}
           onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
-          Second Star ↗
+          Resume ↗
         </a>
       </div>
     </nav>
@@ -221,7 +221,7 @@ function Footer() {
 const PROJECTS = [
   { id:"disney-platform",  title:"Disney+ Platform Design",         desc:"Led UX across key product surfaces for a streaming platform with 131M+ subscribers — interaction patterns, component behavior, and experience consistency at scale.", tags:["Product Design","Interaction Design","Design Systems"], bg:"linear-gradient(135deg,#0A1628,#1B2E5A)", span:"wide" },
   { id:"takeovers",        title:"Taylor Swift & Toy Story Takeovers", desc:"Designed immersive, high-stakes UX for two of Disney+'s most visible cultural events — balancing brand fidelity with seamless user flow.",                   tags:["Experience Design","Event UX","Disney+"],             bg:"linear-gradient(135deg,#3D1A4A,#7A3A8A)" },
-  { id:"ai-workflow",      title:"AI-Powered Design Workflow",       desc:"Built a rapid prototyping pipeline using Cursor, Lovable, and Replit — faster iteration, smarter testing, tighter design-to-dev handoff.",                          tags:["AI Tooling","Prototyping","Figma","ProtoPie"],         bg:"linear-gradient(135deg,#1A3A2A,#2E6B4A)" },
+  { id:"ai-workflow",      title:"AI-Powered Design Workflow",       desc:"Built a rapid prototyping pipeline using Claude, Lovable, and Replit — faster iteration, smarter testing, tighter design-to-dev handoff.",                          tags:["AI Tooling","Prototyping","Figma","ProtoPie"],         bg:"linear-gradient(135deg,#1A3A2A,#2E6B4A)" },
   { id:"second-star",      title:"Second Star Events",               desc:"Founded and led all design for a luxury themed events company — brand, digital experience, and large-scale event design for thousands of guests.",                    tags:["Brand & UX","Experience Design","Founder"],           bg:"linear-gradient(135deg,#3A2010,#7A4A20)" },
 ];
 
@@ -263,7 +263,7 @@ function HomePage() {
             </button>
           </div>
           <div style={{ ...a(0.8),display:"flex",gap:40,marginTop:56 }}>
-            {[["131M+","users reached"],["6+","years experience"],["Disney+","platform design"]].map(([num,label])=>(
+            {[["131M+","users reached"],["6+","years experience"],["Columbia","CS graduate"]].map(([num,label])=>(
               <div key={label}>
                 <p style={{ fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:C.ink }}>{num}</p>
                 <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.muted,marginTop:2 }}>{label}</p>
@@ -275,7 +275,7 @@ function HomePage() {
           <div style={{ width:360,height:460,borderRadius:24,background:`linear-gradient(160deg,${C.cardA},${C.cardB})`,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden" }}>
             <FlowerPeony style={{ position:"absolute",top:-18,right:-18,opacity:0.35,transform:"scale(0.9)" }}/>
             <FlowerDaisy style={{ position:"absolute",bottom:-14,left:-14,opacity:0.35,transform:"scale(0.75)" }}/>
-            <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:C.muted,opacity:0.6 }}>Your photo here</span>
+            <img src="/portfolio/laura.jpg" alt="Laura Marin" style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center top" }}/>
           </div>
         </div>
       </section>
@@ -355,7 +355,7 @@ function HomeProjectCard({ project, delay, onOpen }) {
 // WORK PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const CASE_STUDIES = [
-  { id:"disney-platform",  title:"Disney+ Platform Design",            subtitle:"Designing at scale for 131M+ users",                          tags:["Product Design","Interaction Design","Design Systems","Disney+"], bg:"linear-gradient(135deg,#0A1628,#1B2E5A)", year:"2022–2024", role:"Senior Product Designer", duration:"2 years",    team:"Cross-functional with Engineering, Product & Brand",
+  { id:"disney-platform",  title:"Disney+ Platform Design",            subtitle:"Designing at scale for 131M+ users",                          tags:["Product Design","Interaction Design","Design Systems","Disney+"], bg:"linear-gradient(135deg,#0A1628,#1B2E5A)", year:"2021–Present", role:"Product Designer", duration:"4+ years",    team:"Cross-functional with Engineering, Product & Brand",
     overview:"Led UX across key product surfaces for Disney+. The work spanned defining new interaction patterns to ensuring consistency across a complex, rapidly evolving design system.",
     challenge:"At the scale of 131M+ subscribers, even small UX decisions have massive downstream impact. The challenge was balancing business velocity with the quality and consistency users deserved.",
     process:[
@@ -380,7 +380,7 @@ const CASE_STUDIES = [
     metrics:[["2 events","designed & shipped"],["8 weeks","design-to-launch"],["#1","trending on launch day"]],
   },
   { id:"ai-workflow",      title:"AI-Powered Design Workflow",          subtitle:"Prototyping faster with AI-native tools",                     tags:["AI Tooling","Prototyping","Figma","ProtoPie"],                    bg:"linear-gradient(135deg,#1A3A2A,#2E6B4A)", year:"2024–Now",  role:"Lead Designer",             duration:"Ongoing",        team:"Solo + Cross-functional",
-    overview:"Built a personal design workflow integrating Cursor, Lovable, and Replit alongside Figma and ProtoPie to close the gap between ideation and testable prototype.",
+    overview:"Built a personal design workflow integrating Claude, Lovable, and Replit alongside Figma and ProtoPie to close the gap between ideation and testable prototype.",
     challenge:"Traditional design-to-prototype pipelines create a slow feedback loop. The opportunity was to validate ideas earlier, at higher fidelity, without a full engineering sprint.",
     process:[
       {step:"01",label:"Tool Audit",      desc:"Evaluated AI-native tools for design utility — which accelerated ideation, which were best for testable prototypes, how each integrated with Figma."},
@@ -571,10 +571,10 @@ function NextProjectCard({ cs }) {
 // ABOUT PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const SKILLS_DATA = [
-  { category:"Core UX",          items:["Product Design","Interaction Design","UX Research","Information Architecture","Usability Testing"] },
-  { category:"Systems",          items:["Design Systems","Component Libraries","Interaction Principles","Design Tokens"] },
-  { category:"AI & Prototyping", items:["Figma","ProtoPie","Cursor","Lovable","Replit","After Effects"] },
-  { category:"Collaboration",    items:["Cross-functional Leadership","Engineering Partnership","Stakeholder Alignment","CS Background"] },
+  { category:"Design & Prototyping", items:["Figma","ProtoPie","Framer","After Effects","Adobe Creative Suite"] },
+  { category:"AI-Augmented Design",  items:["Claude Code","Lovable","Replit","Cursor","ProtoPie AI","Prompt-driven iteration"] },
+  { category:"Platforms",            items:["Living Room / TV OS","iOS","Android","Web","Multi-platform Systems"] },
+  { category:"Core Skills",          items:["Product Design","Interaction Design","Motion Design","Design Systems","UX Research"] },
 ];
 const VALUES = [
   { label:"Details matter",         desc:"The micro-interactions, the transitions, the copy — these are what separate a product people tolerate from one they love." },
@@ -583,9 +583,9 @@ const VALUES = [
   { label:"Curiosity over certainty",desc:"I'd rather ask a question that reframes the problem than defend a solution I've fallen in love with." },
 ];
 const EXPERIENCE = [
-  { company:"Disney Streaming",    role:"Senior Product Designer",  period:"2022–2024", desc:"Led UX for Disney+ platform surfaces — interaction systems, design tokens, and high-profile event experiences for 131M+ subscribers." },
-  { company:"[Previous Company]",  role:"Product Designer",          period:"2020–2022", desc:"Add a brief description of your role and key impact here." },
-  { company:"[Previous Company]",  role:"UX Designer",               period:"2018–2020", desc:"Add a brief description of your role and key impact here." },
+  { company:"Disney Streaming",               role:"Product Designer",                  period:"May 2021–Present", desc:"Design and prototype high-fidelity living room, mobile, and web experiences for Disney+, Hulu, and ESPN+ — spanning motion systems, design infrastructure, AI-powered prototyping workflows, and marquee in-app moments for 131M+ subscribers globally." },
+  { company:"Napster (formerly Infinite Reality)", role:"Product Designer (Contract)",   period:"Sep 2025",         desc:"Designed rich interactive experiences for Napster's web and mobile platforms. Built design systems with 100+ unified components for Napster Spaces and Companion. Worked directly with the CTO on a complete brand redesign." },
+  { company:"Anywhere",                       role:"Full-Stack UX Designer (Contract)", period:"Mar 2022–Mar 2023", desc:"Led mobile and web UX for multiple B2B products used by 49,000+ agents across Anywhere's brand portfolio. Designed a mobile onboarding experience now deployed to 200,000+ agents." },
 ];
 
 function AboutPage() {
@@ -617,7 +617,7 @@ function AboutPage() {
             <div style={{ width:"100%",aspectRatio:"3/4",borderRadius:24,background:`linear-gradient(160deg,${C.cardA},${C.cardB})`,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden" }}>
               <FlowerDaisy style={{ position:"absolute",top:-16,right:-16,opacity:0.35,transform:"scale(0.9)" }}/>
               <FlowerPeony style={{ position:"absolute",bottom:-14,left:-14,opacity:0.3,transform:"scale(0.8)" }}/>
-              <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:C.muted,opacity:0.6 }}>Your photo here</span>
+              <img src="/portfolio/laura.jpg" alt="Laura Marin" style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"center top" }}/>
             </div>
             <div style={{ position:"absolute",bottom:-24,right:-24,background:C.cardA,borderRadius:16,padding:"20px 24px",boxShadow:"0 8px 32px rgba(0,0,0,0.08)",maxWidth:220 }}>
               <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:14,color:C.rose,marginBottom:4 }}>Fun fact</p>
@@ -628,10 +628,10 @@ function AboutPage() {
         <div>
           <Reveal>
             <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:20 }}>
-              My background in Computer Science means I speak both design and engineering — making cross-functional work something I genuinely enjoy. I've designed for platforms with <strong style={{ fontWeight:500,color:C.ink }}>131 million+ users</strong> and worked on <strong style={{ fontWeight:500,color:C.ink }}>Disney+ platform experiences</strong>.
+              My CS degree from <strong style={{ fontWeight:500,color:C.ink }}>Barnard College, Columbia University</strong> means I speak both design and engineering — making cross-functional work something I genuinely enjoy. I've designed across living room, mobile, and web for <strong style={{ fontWeight:500,color:C.ink }}>Disney+, Hulu, and ESPN+</strong>, reaching over 131 million subscribers.
             </p>
             <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:20 }}>
-              Lately I've been leaning into AI-powered workflows — using Cursor, Lovable, and Replit alongside Figma and ProtoPie to prototype faster and bring ideas to life at a pace that keeps up with the industry.
+              Lately I've been leaning into AI-powered workflows — using Claude, Lovable, and Replit alongside Figma and ProtoPie to compress prototyping cycles and bring ideas to life faster.
             </p>
             <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9 }}>
               Beyond the screen, I founded <strong style={{ fontWeight:500,color:C.ink }}>Second Star Events</strong> and give back through the <strong style={{ fontWeight:500,color:C.ink }}>Neverland Foundation</strong>.
@@ -639,7 +639,7 @@ function AboutPage() {
           </Reveal>
           <Reveal delay={0.15}>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,marginTop:40 }}>
-              {[["131M+","users reached"],["6+","years experience"],["Disney+","platform design"],["2","companies founded"]].map(([num,label])=>(
+              {[["131M+","users reached"],["6+","years experience"]].map(([num,label])=>(
                 <div key={label} style={{ borderTop:`1px solid ${C.pill}`,paddingTop:16 }}>
                   <p style={{ fontFamily:"'Playfair Display',serif",fontSize:26,fontWeight:700,color:C.ink }}>{num}</p>
                   <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:4 }}>{label}</p>
@@ -716,12 +716,6 @@ function AboutPage() {
               <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:32 }}>
                 Through the <strong style={{ fontWeight:500,color:C.ink }}>Neverland Foundation</strong>, we give back to local communities and create access to magical experiences for those who need it most.
               </p>
-              <a href="https://second-star.events" target="_blank" rel="noreferrer"
-                style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,color:C.ink,textDecoration:"none",borderBottom:`1.5px solid ${C.ink}`,paddingBottom:3,transition:"color 0.2s,border-color 0.2s" }}
-                onMouseEnter={e=>{e.currentTarget.style.color=C.rose;e.currentTarget.style.borderColor=C.rose}}
-                onMouseLeave={e=>{e.currentTarget.style.color=C.ink;e.currentTarget.style.borderColor=C.ink}}>
-                Visit Second Star Events ↗
-              </a>
             </div>
             <div style={{ borderRadius:24,background:"linear-gradient(135deg,#3A2010,#7A4A20)",aspectRatio:"4/3",display:"flex",alignItems:"center",justifyContent:"center" }}>
               <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.25)" }}>Add event photo</span>
@@ -737,14 +731,14 @@ function AboutPage() {
         <Reveal style={{ position:"relative",zIndex:1 }}>
           <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(36px,5vw,68px)",color:C.ink,lineHeight:1.1,marginBottom:20 }}>Let's work together.</h2>
           <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,maxWidth:480,margin:"0 auto 36px",lineHeight:1.8 }}>Always happy to connect with designers, founders, and creatives doing work they're proud of.</p>
-          <a href="mailto:hello@lauramarin.co"
+          <a href="mailto:laruay99@gmail.com"
             style={{ display:"inline-block",fontFamily:"'DM Sans',sans-serif",fontSize:20,fontWeight:400,color:C.ink,textDecoration:"none",borderBottom:`1.5px solid ${C.ink}`,paddingBottom:3,transition:"color 0.2s,border-color 0.2s",marginBottom:40 }}
             onMouseEnter={e=>{e.currentTarget.style.color=C.rose;e.currentTarget.style.borderColor=C.rose}}
             onMouseLeave={e=>{e.currentTarget.style.color=C.ink;e.currentTarget.style.borderColor=C.ink}}>
-            hello@lauramarin.co
+            laruay99@gmail.com
           </a>
           <div style={{ display:"flex",justifyContent:"center",gap:36,flexWrap:"wrap" }}>
-            {[["LinkedIn","https://linkedin.com/in/laura-marin-lopez"],["Second Star Events","https://second-star.events"],["Dribbble","#"],["Read.cv","#"]].map(([label,href])=>(
+            {[["LinkedIn","https://www.linkedin.com/in/laura-marin-lopez/"]].map(([label,href])=>(
               <a key={label} href={href} target="_blank" rel="noreferrer"
                 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
                 onMouseEnter={e=>e.currentTarget.style.color=C.rose}
@@ -781,15 +775,15 @@ function ContactPage() {
           Always happy to connect with designers, founders, and creatives doing work they're proud of.
         </p>
         <div style={{ ...a(0.55) }}>
-          <a href="mailto:hello@lauramarin.co"
+          <a href="mailto:laruay99@gmail.com"
             style={{ fontFamily:"'DM Sans',sans-serif",fontSize:22,fontWeight:400,color:C.ink,textDecoration:"none",borderBottom:`1.5px solid ${C.ink}`,paddingBottom:3,transition:"color 0.2s,border-color 0.2s",display:"inline-block",marginBottom:52 }}
             onMouseEnter={e=>{e.currentTarget.style.color=C.rose;e.currentTarget.style.borderColor=C.rose}}
             onMouseLeave={e=>{e.currentTarget.style.color=C.ink;e.currentTarget.style.borderColor=C.ink}}>
-            hello@lauramarin.co
+            laruay99@gmail.com
           </a>
         </div>
         <div style={{ ...a(0.65),display:"flex",justifyContent:"center",gap:36,flexWrap:"wrap" }}>
-          {[["LinkedIn","https://linkedin.com/in/laura-marin-lopez"],["Second Star Events","https://second-star.events"],["Dribbble","#"],["Read.cv","#"]].map(([label,href])=>(
+          {[["LinkedIn","https://www.linkedin.com/in/laura-marin-lopez/"]].map(([label,href])=>(
             <a key={label} href={href} target="_blank" rel="noreferrer"
               style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
               onMouseEnter={e=>e.currentTarget.style.color=C.rose}
