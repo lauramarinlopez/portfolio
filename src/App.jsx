@@ -621,7 +621,7 @@ function WorkIndex({ onSelect }) {
       <div className="side-pad" style={{ padding:isMobile?"88px 24px 48px":"120px 64px 72px",position:"relative",overflow:"hidden" }}>
         {!isMobile && <FlowerPeony style={{ position:"absolute",top:80,right:0,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>}
         <h1 style={{ ...a(0.25),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(48px,6vw,80px)",color:C.ink,lineHeight:1.05 }}>Projects</h1>
-        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,marginTop:16,lineHeight:1.7 }}>Most of my work is under NDAs, but here are some projects that I've worked on!</p>
+        <p style={{ ...a(0.35),fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,marginTop:16,lineHeight:1.7 }}>Most of my work is under NDAs, but here are some projects that I've worked on!</p>
       </div>
       <div className="side-pad" style={{ padding:isMobile?"0 24px 72px":"0 64px 100px",display:"grid",gridTemplateColumns:isMobile?"1fr":"repeat(auto-fit,minmax(300px,1fr))",gap:20 }}>
         {CASE_STUDIES.map((cs,i)=>(
