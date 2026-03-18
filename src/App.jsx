@@ -364,25 +364,25 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-theme-5.png",
           "/portfolio/disney/disney-theme-6.png",
         ],
-        columns:3, aspectRatio:"4/3",
+        columns:3, gap:22, borderRadius:20,
       },
       {
         label:"Design and Interaction — First Iterations",
-        images:[
-          "/portfolio/disney/disney-iteration-1.png",
-          "/portfolio/disney/disney-iteration-2.png",
-        ],
-        columns:2, aspectRatio:"3/2",
-      },
-      {
-        label:"Designing for motion",
         images:[
           "/portfolio/disney/disney-motion-brandtiles.png",
           "/portfolio/disney/disney-motion-1.mp4",
           "/portfolio/disney/disney-motion-2.mov",
         ],
-        columns:3, aspectRatio:"9/16",
+        columns:3, gap:22, borderRadius:25,
         imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
+      },
+      {
+        label:"Designing for motion",
+        images:[
+          "/portfolio/disney/disney-iteration-1.png",
+          "/portfolio/disney/disney-iteration-2.png",
+        ],
+        columns:2, gap:22, borderRadius:10,
       },
       {
         label:"Final Versions: Brands",
@@ -393,12 +393,12 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-brand-avatar.mp4",
           "/portfolio/disney/disney-brand-natgeo.mp4",
         ],
-        columns:5, aspectRatio:"9/16",
+        columns:5, gap:38, borderRadius:25,
       },
       {
         label:"Final Versions: Fireworks celebratory moment",
         images:["/portfolio/disney/disney-fireworks-final.png"],
-        columns:1, aspectRatio:"16/9",
+        columns:1, gap:0, borderRadius:16,
       },
       {
         label:"Final Versions: Sections",
@@ -409,7 +409,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-sections-4.mp4",
           "/portfolio/disney/disney-sections-5.mp4",
         ],
-        columns:5, aspectRatio:"9/16",
+        columns:5, gap:32, borderRadius:45,
       },
     ],
     impact:[
@@ -610,8 +610,9 @@ function CaseStudyDetail({ cs, onBack }) {
 
       {/* ── Gallery sections ── */}
       {cs.gallery && cs.gallery.map((section,si)=>{
-        const cols = section.columns ?? (section.images?.length===1?1:section.images?.length===2?2:3);
-        const ar   = section.aspectRatio ?? (section.images?.length===1?"16/9":"4/3");
+        const cols   = section.columns ?? (section.images?.length===1?1:section.images?.length===2?2:3);
+        const gap    = section.gap ?? (section.imageCaptions ? 20 : 16);
+        const radius = section.borderRadius ?? 16;
         return (
           <Reveal key={si}>
             <div className="side-pad" style={{ padding:"0 64px 72px" }}>
@@ -619,12 +620,12 @@ function CaseStudyDetail({ cs, onBack }) {
                 <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
               )}
               {section.images && section.images.length > 0 ? (
-                <div style={{ display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap:section.imageCaptions?20:16,alignItems:"start" }}>
+                <div style={{ display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap,alignItems:"start" }}>
                   {section.images.map((src,ii)=>{
                     const isVideo = /\.(mp4|mov|webm)$/i.test(src);
                     return (
                       <div key={ii}>
-                        <div style={{ borderRadius:16,overflow:"hidden" }}>
+                        <div style={{ borderRadius:radius,overflow:"hidden" }}>
                           {isVideo
                             ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"auto",display:"block" }}/>
                             : <img src={src} alt="" style={{ width:"100%",height:"auto",display:"block" }}/>
