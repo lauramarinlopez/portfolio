@@ -993,29 +993,7 @@ function AboutPage() {
         ))}
       </section>
 
-      {/* Second Star */}
-      <section className="side-pad" style={{ padding:"80px 64px 100px",position:"relative",overflow:"hidden" }}>
-        <FlowerBlossom style={{ position:"absolute",right:0,bottom:40,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>
-        <Reveal>
-          <div className="two-col" style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:72,alignItems:"center",position:"relative",zIndex:1 }}>
-            <div>
-              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>Beyond the screen</p>
-              <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(32px,4vw,50px)",color:C.ink,lineHeight:1.2,marginBottom:24 }}>Second Star Events</h2>
-              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:20 }}>
-                I founded Second Star Events — a luxury themed events company producing large-scale immersive experiences for thousands of guests across multiple U.S. cities. Partners include Leftfield Media/AwesomeCon.
-              </p>
-              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:32 }}>
-                Through the <strong style={{ fontWeight:500,color:C.ink }}>Neverland Foundation</strong>, we give back to local communities and create access to magical experiences for those who need it most.
-              </p>
-            </div>
-            <div style={{ borderRadius:24,background:"linear-gradient(135deg,#3A2010,#7A4A20)",aspectRatio:"4/3",display:"flex",alignItems:"center",justifyContent:"center" }}>
-              <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.25)" }}>Add event photo</span>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* Contact CTA */}
+{/* Contact CTA */}
       <section className="side-pad" style={{ padding:"80px 64px 100px",textAlign:"center",background:C.cardA,position:"relative",overflow:"hidden" }}>
         <FlowerLavender  style={{ position:"absolute",left:"5%", bottom:20,opacity:0.12,transform:"scale(2.2)",pointerEvents:"none" }}/>
         <FlowerSunflower style={{ position:"absolute",right:"5%",bottom:20,opacity:0.12,transform:"scale(2.2)",pointerEvents:"none" }}/>
