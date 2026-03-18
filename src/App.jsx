@@ -861,10 +861,10 @@ function NextProjectCard({ cs }) {
 // ABOUT PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const SKILLS_DATA = [
-  { category:"Design & Prototyping", items:["Figma","ProtoPie","Framer","After Effects","Adobe Creative Suite"] },
+  { category:"Design & Prototyping", items:["Figma","Figma Make","ProtoPie","Framer","After Effects","Adobe Creative Suite","UserTesting"] },
   { category:"AI-Augmented Design",  items:["Claude Code","Lovable","Replit","Cursor","ProtoPie AI","Prompt-driven iteration"] },
   { category:"Platforms",            items:["Living Room / TV OS","iOS","Android","Web","Multi-platform Systems"] },
-  { category:"Core Skills",          items:["Product Design","Interaction Design","Motion Design","Design Systems","UX Research"] },
+  { category:"Core Skills",          items:["Product Design","Interaction Design","Motion Design","Design Systems","UX Research","User Research","Cross-functional Collaboration","A/B Testing"] },
 ];
 const VALUES = [
   { label:"Details matter",         desc:"The micro-interactions, the transitions, the copy — these are what separate a product people tolerate from one they love." },
