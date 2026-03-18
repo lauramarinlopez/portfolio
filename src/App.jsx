@@ -346,16 +346,71 @@ const CASE_STUDIES = [
     tags:["Mobile Design","Motion Design","Scroll Interaction","Disney"],
     bg:"linear-gradient(135deg,#3D1A00,#8B4500)",
     year:"2024–2025",
-    role:"Product Designer",
+    role:"Product Designer\nCross-collaboration",
     platform:"Mobile Web",
-    contribution:"Interaction Design, Motion Design, Prototyping",
-    heroImage:"/portfolio/disney-com-cover.png",
+    contribution:"Mobile Design,\nMotion Design,\nPrototyping",
+    heroImage:"/portfolio/disney/disney-hero.png",
     cardImage:"/portfolio/disney-com-cover.png",
-    overview:"Redesigned Disney.com for mobile to create a more engaging, delightful, and motion-enhanced experience that reflects the magic of the brand. I translated static high-fidelity comps into functional interactive prototypes, identified key moments to enhance with motion, and worked closely with engineering to define motion documentation for handoff.",
+    overview:"Redesigned Disney.com for mobile to create a more engaging, delightful, and motion-enhanced experience that reflects the magic of the brand. I created static high-fidelity comps, translated them into functional interactive prototypes, identified key moments to enhance with motion, and worked closely with engineering to define motion documentation for handoff.",
     metrics:[["8+ brands","one interaction system"],["Static + Motion","fully designed"],["375px","mobile-first target"]],
     gallery:[
-      { label:"Brand Cards", desc:"", images:["/portfolio/disney-com-moodboards.jpg"] },
-      { label:"Motion & Interaction", desc:"", images:[] },
+      {
+        label:"Theme Explorations",
+        images:[
+          "/portfolio/disney/disney-theme-1.png",
+          "/portfolio/disney/disney-theme-2.png",
+          "/portfolio/disney/disney-theme-3.png",
+          "/portfolio/disney/disney-theme-4.png",
+          "/portfolio/disney/disney-theme-5.png",
+          "/portfolio/disney/disney-theme-6.png",
+        ],
+        columns:3, aspectRatio:"4/3",
+      },
+      {
+        label:"Design and Interaction — First Iterations",
+        images:[
+          "/portfolio/disney/disney-iteration-1.png",
+          "/portfolio/disney/disney-iteration-2.png",
+        ],
+        columns:2, aspectRatio:"3/2",
+      },
+      {
+        label:"Designing for motion",
+        images:[
+          "/portfolio/disney/disney-motion-brandtiles.png",
+          "/portfolio/disney/disney-motion-fireworks.png",
+          "/portfolio/disney/disney-motion-progress.png",
+        ],
+        columns:3, aspectRatio:"9/16",
+        imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
+      },
+      {
+        label:"Final Versions: Brands",
+        images:[
+          "/portfolio/disney/disney-brand-pixar.png",
+          "/portfolio/disney/disney-brand-hulu.png",
+          "/portfolio/disney/disney-brand-espn.png",
+          "/portfolio/disney/disney-brand-avatar.png",
+          "/portfolio/disney/disney-brand-natgeo.png",
+        ],
+        columns:5, aspectRatio:"9/16",
+      },
+      {
+        label:"Final Versions: Fireworks celebratory moment",
+        images:["/portfolio/disney/disney-fireworks-final.png"],
+        columns:1, aspectRatio:"16/9",
+      },
+      {
+        label:"Final Versions: Sections",
+        images:[
+          "/portfolio/disney/disney-sections-1.png",
+          "/portfolio/disney/disney-sections-2.png",
+          "/portfolio/disney/disney-sections-3.png",
+          "/portfolio/disney/disney-sections-4.png",
+          "/portfolio/disney/disney-sections-5.png",
+        ],
+        columns:5, aspectRatio:"9/16",
+      },
     ],
     impact:[
       { color:"#4A7B9D", text:"Elevated brand storytelling through subtle, narrative-driven motion that reinforced Disney's emotional tone" },
@@ -554,31 +609,40 @@ function CaseStudyDetail({ cs, onBack }) {
       </Reveal>
 
       {/* ── Gallery sections ── */}
-      {cs.gallery && cs.gallery.map((section,si)=>(
-        <Reveal key={si}>
-          <div className="side-pad" style={{ padding:"0 64px 72px" }}>
-            {section.label && (
-              <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
-            )}
-            {section.images && section.images.length > 0 ? (
-              <div style={{ display:"grid",gridTemplateColumns:section.images.length===1?"1fr":section.images.length===2?"1fr 1fr":"repeat(3,1fr)",gap:16 }}>
-                {section.images.map((img,ii)=>(
-                  <div key={ii} style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:section.images.length===1?"16/9":"4/3" }}>
-                    <img src={img} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div style={{ borderRadius:16,background:C.cardA,aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center" }}>
-                <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,opacity:0.5 }}>Add images</span>
-              </div>
-            )}
-            {section.desc && (
-              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:C.muted,maxWidth:680,lineHeight:1.8,marginTop:20 }}>{section.desc}</p>
-            )}
-          </div>
-        </Reveal>
-      ))}
+      {cs.gallery && cs.gallery.map((section,si)=>{
+        const cols = section.columns ?? (section.images?.length===1?1:section.images?.length===2?2:3);
+        const ar   = section.aspectRatio ?? (section.images?.length===1?"16/9":"4/3");
+        return (
+          <Reveal key={si}>
+            <div className="side-pad" style={{ padding:"0 64px 72px" }}>
+              {section.label && (
+                <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
+              )}
+              {section.images && section.images.length > 0 ? (
+                <div style={{ display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap:section.imageCaptions?20:16,alignItems:"start" }}>
+                  {section.images.map((img,ii)=>(
+                    <div key={ii}>
+                      <div style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:ar }}>
+                        <img src={img} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
+                      </div>
+                      {section.imageCaptions?.[ii] && (
+                        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:10,textAlign:"center" }}>{section.imageCaptions[ii]}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div style={{ borderRadius:16,background:C.cardA,aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center" }}>
+                  <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",color:C.muted,opacity:0.5 }}>Add images</span>
+                </div>
+              )}
+              {section.desc && (
+                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:C.muted,maxWidth:680,lineHeight:1.8,marginTop:20 }}>{section.desc}</p>
+              )}
+            </div>
+          </Reveal>
+        );
+      })}
 
       {/* ── Impact ── */}
       {cs.impact && (
