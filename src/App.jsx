@@ -409,9 +409,9 @@ const CASE_STUDIES = [
     tags:["Mobile Design","Motion Design","Scroll Interaction","Disney"],
     bg:"linear-gradient(135deg,#3D1A00,#8B4500)",
     year:"2024–2025",
-    role:"Product Designer\nCross-collaboration",
+    role:"Product Designer",
     platform:"Mobile Web",
-    contribution:"Mobile Design,\nMotion Design,\nPrototyping",
+    contribution:"Interaction Design,\nMotion Design,\nPrototyping",
     heroImage:"/portfolio/disney/disney-hero.png",
     cardImage:"/portfolio/disney-com-cover.png",
     overview:"Redesigned Disney.com for mobile to create a more engaging, delightful, and motion-enhanced experience that reflects the magic of the brand. I created static high-fidelity comps, translated them into functional interactive prototypes, identified key moments to enhance with motion, and worked closely with engineering to define motion documentation for handoff.",
@@ -427,7 +427,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-theme-5.png",
           "/portfolio/disney/disney-theme-6.png",
         ],
-        columns:3, gap:22, borderRadius:20,
+        columns:3, gap:22, borderRadius:20, mobileCols:2,
       },
       {
         label:"Design and Interaction — First Iterations",
@@ -439,6 +439,7 @@ const CASE_STUDIES = [
         gridTemplate:"416fr 276fr 331fr", gap:69, maxWidth:1161, borderRadius:25, itemHeight:602,
         imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
         captionMarginTop:30,
+        mobileOrder:[1,0,2], mobileGridTemplate:"83fr 125fr 99fr",
       },
       {
         label:"Designing for motion",
@@ -457,7 +458,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-brand-avatar.mp4",
           "/portfolio/disney/disney-brand-natgeo.mp4",
         ],
-        columns:5, gap:38, borderRadius:25,
+        columns:5, gap:38, borderRadius:25, mobileOrder:[4,3,2,1,0],
       },
       {
         label:"Final Versions: Fireworks celebratory moment",
@@ -647,20 +648,20 @@ function CaseStudyDetail({ cs, onBack }) {
       <Reveal>
         <div className="side-pad" style={{ padding:isMobile?"32px 24px 56px":"56px 64px 100px" }}>
           {isMobile ? (
-            <div>
-              <div style={{ display:"flex",flexWrap:"wrap",gap:"24px 40px",marginBottom:32 }}>
+            <div style={{ textAlign:"center" }}>
+              <div style={{ display:"flex",flexDirection:"column",alignItems:"center",gap:38,marginBottom:56 }}>
                 {[
                   ["ROLE",cs.role,C.rose],
                   ["PLATFORM",cs.platform,"#4A7B9D"],
                   ["CONTRIBUTION",cs.contribution,"#6A8A5A"],
                 ].map(([label,val,color])=>(
                   <div key={label}>
-                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:6 }}>{label}</p>
-                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.ink,lineHeight:1.55,whiteSpace:"pre-line" }}>{val}</p>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:8 }}>{label}</p>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:17,color:C.ink,lineHeight:1.65,whiteSpace:"pre-line",textAlign:"center" }}>{val}</p>
                   </div>
                 ))}
               </div>
-              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:"#4A4438",lineHeight:1.85 }}>{cs.overview}</p>
+              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:"#4A4438",lineHeight:1.85,textAlign:"center" }}>{cs.overview}</p>
             </div>
           ) : (
             <div style={{ display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start",maxWidth:900,margin:"0 auto" }}>
@@ -695,10 +696,12 @@ function CaseStudyDetail({ cs, onBack }) {
       {/* ── Gallery sections ── */}
       {cs.gallery && cs.gallery.map((section,si)=>{
         const cols   = section.columns ?? (section.images?.length===1?1:section.images?.length===2?2:3);
-        const mobileCols = cols >= 5 ? 3 : cols;
-        const effectiveCols = isMobile ? mobileCols : cols;
-        const gridTemplate = isMobile
-          ? (cols >= 5 ? `repeat(3,1fr)` : (section.gridTemplate ?? `repeat(${mobileCols},1fr)`))
+        const mobileCols = section.mobileCols ?? (cols >= 5 ? 3 : cols);
+        const isStaggered5 = isMobile && cols >= 5 && section.images?.length === 5;
+        const gridTemplate = isStaggered5
+          ? `repeat(3,1fr)`
+          : isMobile
+          ? (section.mobileGridTemplate ?? section.gridTemplate ?? `repeat(${mobileCols},1fr)`)
           : (section.gridTemplate ?? `repeat(${cols},1fr)`);
         const gap    = isMobile ? (section.gap ? Math.round(section.gap * 0.4) : 10) : (section.gap ?? (section.imageCaptions ? 20 : 16));
         const radius = isMobile ? Math.round((section.borderRadius ?? 16) * 0.5) : (section.borderRadius ?? 16);
@@ -706,32 +709,53 @@ function CaseStudyDetail({ cs, onBack }) {
         const effectiveItemHeight = isMobile
           ? (section.itemHeight ? Math.round(section.itemHeight * 0.3) : undefined)
           : section.itemHeight;
+
+        const activeImages   = isMobile && section.mobileOrder ? section.mobileOrder.map(i => section.images[i]) : section.images;
+        const activeCaptions = isMobile && section.mobileOrder && section.imageCaptions ? section.mobileOrder.map(i => section.imageCaptions[i]) : section.imageCaptions;
+
+        const renderMediaItem = (src, ii) => {
+          const isVideo = /\.(mp4|mov|webm)$/i.test(src);
+          return (
+            <div key={ii}>
+              <div style={{ borderRadius:radius,overflow:"hidden" }}>
+                {isVideo
+                  ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block",objectFit:effectiveItemHeight?"cover":undefined }}/>
+                  : <img src={src} alt="" style={{ width:"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block",objectFit:effectiveItemHeight?"cover":undefined }}/>
+                }
+              </div>
+              {activeCaptions?.[ii] && (
+                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:section.captionMarginTop??10,textAlign:"center" }}>{activeCaptions[ii]}</p>
+              )}
+            </div>
+          );
+        };
+
         return (
           <Reveal key={si}>
             <div className="side-pad" style={{ padding:isMobile?"0 24px 48px":"0 64px 72px" }}>
               {section.label && (
                 <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
               )}
-              {section.images && section.images.length > 0 ? (
+              {activeImages && activeImages.length > 0 ? (
                 <div style={{ maxWidth:effectiveMaxWidth,margin:"0 auto" }}>
-                <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
-                  {section.images.map((src,ii)=>{
-                    const isVideo = /\.(mp4|mov|webm)$/i.test(src);
-                    return (
-                      <div key={ii}>
-                        <div style={{ borderRadius:radius,overflow:"hidden" }}>
-                          {isVideo
-                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block",objectFit:effectiveItemHeight?"cover":undefined }}/>
-                            : <img src={src} alt="" style={{ width:"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block",objectFit:effectiveItemHeight?"cover":undefined }}/>
-                          }
-                        </div>
-                        {section.imageCaptions?.[ii] && (
-                          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:section.captionMarginTop??10,textAlign:"center" }}>{section.imageCaptions[ii]}</p>
-                        )}
+                  {isStaggered5 ? (
+                    <div>
+                      <div style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap,alignItems:"start" }}>
+                        {activeImages.slice(0,3).map((src,ii) => renderMediaItem(src, ii))}
                       </div>
-                    );
-                  })}
-                </div>
+                      <div style={{ display:"flex",gap,justifyContent:"center",marginTop:gap,alignItems:"start" }}>
+                        {activeImages.slice(3,5).map((src,ii) => (
+                          <div key={ii+3} style={{ flex:`0 0 calc((100% - 2 * ${gap}px) / 3)` }}>
+                            {renderMediaItem(src, ii+3)}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
+                      {activeImages.map((src,ii) => renderMediaItem(src, ii))}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div style={{ borderRadius:16,background:C.cardA,aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center" }}>
@@ -751,14 +775,16 @@ function CaseStudyDetail({ cs, onBack }) {
         <Reveal>
           <div className="side-pad" style={{ padding:isMobile?"20px 24px 72px":"20px 64px 96px",display:"grid",gridTemplateColumns:isMobile?"1fr":"200px 1fr",gap:isMobile?24:88,alignItems:"start" }}>
             <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(28px,3vw,40px)",color:C.ink }}>Impact</h2>
-            <div style={{ display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:0 }}>
+            <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:0 }}>
               {cs.impact.map((item,i)=>{
-                const isLeft = isMobile ? false : i % 2 === 0;
-                const isTop  = isMobile ? i < (cs.impact.length - 1) : i < 2;
+                const isLeft = i % 2 === 0;
+                const isTop  = i < 2;
+                const pr = isLeft ? (isMobile ? 16 : 40) : 0;
+                const pl = isLeft ? 0 : (isMobile ? 16 : 40);
                 return (
-                  <div key={i} style={{ padding:"32px 0",borderBottom:isTop?`1px dashed ${C.pill}`:"none",borderRight:isLeft?`1px dashed ${C.pill}`:"none",paddingRight:isLeft?40:0,paddingLeft:isLeft?0:(isMobile?0:40) }}>
-                    <div style={{ width:44,height:44,borderRadius:"50%",background:item.color,marginBottom:16 }}/>
-                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink,lineHeight:1.75,maxWidth:280 }}>{item.text}</p>
+                  <div key={i} style={{ padding:isMobile?"20px 0":"32px 0",borderBottom:isTop?`1px dashed ${C.pill}`:"none",borderRight:isLeft?`1px dashed ${C.pill}`:"none",paddingRight:pr,paddingLeft:pl }}>
+                    <div style={{ width:isMobile?36:44,height:isMobile?36:44,borderRadius:"50%",background:item.color,marginBottom:12 }}/>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:isMobile?13:15,color:C.ink,lineHeight:1.75 }}>{item.text}</p>
                   </div>
                 );
               })}
