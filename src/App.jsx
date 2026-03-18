@@ -219,8 +219,8 @@ function Footer() {
 // HOME PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const PROJECTS = [
-  { id:"disney-com",      title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/disney-com-cover.png" },
-  { id:"napster-spaces",  title:"Napster Spaces",             desc:"Designed rich interactive experiences and a unified design system with 100+ components for Napster's web platform.", tags:["Product Design","Design Systems","Web"], bg:"linear-gradient(135deg,#1A0A2E,#3D1A6E)", cardImage:"/napster-spaces-cover.png" },
+  { id:"disney-com",      title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/portfolio/disney-com-cover.png" },
+  { id:"napster-spaces",  title:"Napster Spaces",             desc:"Designed rich interactive experiences and a unified design system with 100+ components for Napster's web platform.", tags:["Product Design","Design Systems","Web"], bg:"linear-gradient(135deg,#1A0A2E,#3D1A6E)", cardImage:"/portfolio/napster-spaces-cover.png" },
 ];
 
 function HomePage() {
@@ -349,8 +349,8 @@ const CASE_STUDIES = [
     role:"Product Designer",
     platform:"Mobile Web",
     contribution:"Interaction Design, Motion Design, Prototyping",
-    heroImage:"/disney-com-cover.png",
-    cardImage:"/disney-com-cover.png",
+    heroImage:"/portfolio/disney-com-cover.png",
+    cardImage:"/portfolio/disney-com-cover.png",
     overview:"Redesigned Disney.com for mobile to create a more engaging, delightful, and motion-enhanced experience that reflects the magic of the brand. I translated static high-fidelity comps into functional interactive prototypes, identified key moments to enhance with motion, and worked closely with engineering to define motion documentation for handoff.",
     metrics:[["8+ brands","one interaction system"],["Static + Motion","fully designed"],["375px","mobile-first target"]],
     gallery:[
@@ -374,12 +374,12 @@ const CASE_STUDIES = [
     role:"Product Designer (Contract)",
     platform:"Web",
     contribution:"Product Design, Design Systems, Visual Design",
-    heroImage:"/napster-spaces-cover.png",
-    cardImage:"/napster-spaces-cover.png",
+    heroImage:"/portfolio/napster-spaces-cover.png",
+    cardImage:"/portfolio/napster-spaces-cover.png",
     overview:"Designed rich interactive experiences for Napster's web platform. Built a unified design system with 100+ components for Napster Spaces and Companion, and worked directly with the CTO on a complete brand redesign.",
     metrics:[["100+","unified components"],["1","complete brand redesign"],["Direct","CTO collaboration"]],
     gallery:[
-      { label:"", desc:"", images:["/napster-spaces-cover.png","/napster-spaces-1.png","/napster-spaces-2.png","/napster-spaces-3.png"] },
+      { label:"", desc:"", images:["/portfolio/napster-spaces-cover.png","/portfolio/napster-spaces-1.png","/portfolio/napster-spaces-2.png","/portfolio/napster-spaces-3.png"] },
     ],
     impact:[
       { color:"#6A4A9A", text:"Built a unified design system with 100+ components used across Napster Spaces and Companion" },
