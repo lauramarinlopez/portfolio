@@ -676,13 +676,6 @@ function CaseStudyDetail({ cs, onBack }) {
         </Reveal>
       )}
 
-      {/* ── Next project ── */}
-      <Reveal>
-        <div className="side-pad" style={{ padding:"0 64px 80px" }}>
-          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:500,letterSpacing:"0.14em",textTransform:"uppercase",color:C.muted,marginBottom:24 }}>Next Project</p>
-          <NextProjectCard cs={nextCs}/>
-        </div>
-      </Reveal>
 
       <Footer/>
     </div>
