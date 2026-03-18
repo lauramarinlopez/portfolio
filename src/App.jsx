@@ -352,7 +352,7 @@ const CASE_STUDIES = [
     heroImage:"/portfolio/disney/disney-hero.png",
     cardImage:"/portfolio/disney-com-cover.png",
     overview:"Redesigned Disney.com for mobile to create a more engaging, delightful, and motion-enhanced experience that reflects the magic of the brand. I created static high-fidelity comps, translated them into functional interactive prototypes, identified key moments to enhance with motion, and worked closely with engineering to define motion documentation for handoff.",
-    metrics:[["8+ brands","one interaction system"],["Static + Motion","fully designed"],["375px","mobile-first target"]],
+    metrics:[],
     gallery:[
       {
         label:"Theme Explorations",
@@ -626,8 +626,8 @@ function CaseStudyDetail({ cs, onBack }) {
                       <div key={ii}>
                         <div style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:ar }}>
                           {isVideo
-                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"100%",objectFit:"cover",display:"block" }}/>
-                            : <img src={src} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
+                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"100%",objectFit:"contain",display:"block" }}/>
+                            : <img src={src} alt="" style={{ width:"100%",height:"100%",objectFit:"contain" }}/>
                           }
                         </div>
                         {section.imageCaptions?.[ii] && (
