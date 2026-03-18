@@ -190,7 +190,7 @@ function Nav() {
           Contact
         </button>
         <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer"
-          style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
+          style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:600,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
           onMouseEnter={e=>e.currentTarget.style.color=C.ink}
           onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
           Resume ↗
@@ -219,7 +219,8 @@ function Footer() {
 // HOME PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 const PROJECTS = [
-  { id:"disney-com", title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/disney-com-cover.png" },
+  { id:"disney-com",      title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/disney-com-cover.png" },
+  { id:"napster-spaces",  title:"Napster Spaces",             desc:"Designed rich interactive experiences and a unified design system with 100+ components for Napster's web platform.", tags:["Product Design","Design Systems","Web"], bg:"linear-gradient(135deg,#1A0A2E,#3D1A6E)", cardImage:"/napster-spaces-cover.png" },
 ];
 
 function HomePage() {
@@ -363,6 +364,30 @@ const CASE_STUDIES = [
       { color:"#8A6A9A", text:"Designed both static UX and motion end-to-end across 8+ brand identities" },
     ],
   },
+  {
+    id:"napster-spaces",
+    title:"Napster Spaces",
+    subtitle:"Building a design system for the future of music",
+    tags:["Product Design","Design Systems","Web"],
+    bg:"linear-gradient(135deg,#1A0A2E,#3D1A6E)",
+    year:"2025–2026",
+    role:"Product Designer (Contract)",
+    platform:"Web",
+    contribution:"Product Design, Design Systems, Visual Design",
+    heroImage:"/napster-spaces-cover.png",
+    cardImage:"/napster-spaces-cover.png",
+    overview:"Designed rich interactive experiences for Napster's web platform. Built a unified design system with 100+ components for Napster Spaces and Companion, and worked directly with the CTO on a complete brand redesign.",
+    metrics:[["100+","unified components"],["1","complete brand redesign"],["Direct","CTO collaboration"]],
+    gallery:[
+      { label:"", desc:"", images:["/napster-spaces-cover.png","/napster-spaces-1.png","/napster-spaces-2.png","/napster-spaces-3.png"] },
+    ],
+    impact:[
+      { color:"#6A4A9A", text:"Built a unified design system with 100+ components used across Napster Spaces and Companion" },
+      { color:"#4A7B9D", text:"Led a complete brand redesign working directly with the CTO" },
+      { color:"#A0522D", text:"Designed rich interactive experiences for Napster's web platform" },
+      { color:"#6A8A5A", text:"Established a scalable visual language for the future of the product" },
+    ],
+  },
 ];
 
 const WORK_PASSWORD = "LM26";
@@ -484,7 +509,7 @@ function CaseStudyDetail({ cs, onBack }) {
           onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
           ← All work
         </button>
-        <h1 style={{ ...a(0.2),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(40px,5vw,72px)",color:C.ink,lineHeight:1.1,maxWidth:860 }}>{cs.title}</h1>
+        <h1 style={{ ...a(0.2),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(32px,3.5vw,52px)",color:C.ink,lineHeight:1.1,whiteSpace:"nowrap" }}>{cs.title}</h1>
       </div>
 
       {/* ── Hero image ── */}
@@ -499,7 +524,7 @@ function CaseStudyDetail({ cs, onBack }) {
 
       {/* ── Meta sidebar + Overview ── */}
       <Reveal>
-        <div className="side-pad" style={{ padding:"56px 64px 100px",display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"center" }}>
+        <div className="side-pad" style={{ padding:"56px 64px 100px" }}><div style={{ display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start",maxWidth:900,margin:"0 auto" }}>
           {/* Left: role / platform / contribution */}
           <div style={{ display:"flex",flexDirection:"column",gap:52 }}>
             {[
@@ -509,7 +534,7 @@ function CaseStudyDetail({ cs, onBack }) {
             ].map(([label,val,color])=>(
               <div key={label}>
                 <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:10 }}>{label}</p>
-                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink,lineHeight:1.65 }}>{val}</p>
+                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:17,color:C.ink,lineHeight:1.65 }}>{val}</p>
               </div>
             ))}
           </div>
@@ -525,7 +550,7 @@ function CaseStudyDetail({ cs, onBack }) {
               ))}
             </div>
           </div>
-        </div>
+        </div></div>
       </Reveal>
 
       {/* ── Gallery sections ── */}
