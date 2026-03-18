@@ -341,32 +341,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* About teaser */}
-      <section className="side-pad" style={{ padding:"0 64px 100px" }}>
-        <Reveal>
-          <div style={{ background:C.cardA,borderRadius:24,padding:"56px 64px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:64,alignItems:"center",position:"relative",overflow:"hidden" }}>
-            <FlowerBlossom style={{ position:"absolute",right:0,bottom:0,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>
-            <div style={{ position:"relative",zIndex:1 }}>
-              <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:"clamp(32px,3.5vw,48px)",fontWeight:400,color:C.ink,marginBottom:20 }}>
-                A designer who also builds.
-              </h2>
-              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:"#4A4438",lineHeight:1.85 }}>
-                My CS background means I work alongside engineering, not just hand things off to them. Lately that means AI-native prototyping tools that close the gap between idea and testable product.
-              </p>
-            </div>
-            <div style={{ position:"relative",zIndex:1 }}>
-              <p style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontSize:"clamp(20px,2.2vw,28px)",fontWeight:400,color:C.rose,lineHeight:1.5,marginBottom:32 }}>
-                "The details are what make an experience go from functional to memorable."
-              </p>
-              <button onClick={()=>go("about")} style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,color:C.ink,background:"none",border:"none",borderBottom:`1.5px solid ${C.ink}`,cursor:"pointer",paddingBottom:3,transition:"color 0.2s,border-color 0.2s" }}
-                onMouseEnter={e=>{e.currentTarget.style.color=C.rose;e.currentTarget.style.borderColor=C.rose}}
-                onMouseLeave={e=>{e.currentTarget.style.color=C.ink;e.currentTarget.style.borderColor=C.ink}}>
-                More about me →
-              </button>
-            </div>
-          </div>
-        </Reveal>
-      </section>
 
       <Footer/>
     </div>
