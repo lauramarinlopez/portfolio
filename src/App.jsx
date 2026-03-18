@@ -46,6 +46,16 @@ const G = `
 const RouterContext = createContext(null);
 function useRouter() { return useContext(RouterContext); }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 768);
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+  return isMobile;
+}
+
 // ── Reveal ──────────────────────────────────────────────────────────────────
 function Reveal({ children, delay = 0, style = {} }) {
   const ref = useRef(null);
@@ -148,6 +158,10 @@ function FlowerSunflower({ style }) {
 // ── Shared Nav ───────────────────────────────────────────────────────────────
 function Nav() {
   const { page, go } = useRouter();
+  const isMobile = useIsMobile();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const navigate = (target) => { setMenuOpen(false); go(target); };
 
   const linkStyle = (target) => ({
     fontFamily: "'DM Sans',sans-serif",
@@ -164,39 +178,88 @@ function Nav() {
     transition: "color 0.2s, border-color 0.2s",
   });
 
+  const menuLinkStyle = {
+    fontFamily: "'DM Sans',sans-serif",
+    fontSize: 28,
+    fontWeight: 600,
+    color: C.ink,
+    textDecoration: "none",
+    cursor: "pointer",
+    background: "none",
+    border: "none",
+    padding: "8px 0",
+  };
+
   return (
-    <nav className="side-pad" style={{ position:"fixed",top:0,left:0,right:0,zIndex:100,display:"flex",justifyContent:"space-between",alignItems:"center",padding:"20px 64px",background:"rgba(242,237,228,0.92)",backdropFilter:"blur(14px)" }}>
-      <div style={{ display:"flex", gap:36 }}>
-        <button onClick={()=>go("work")} style={linkStyle("work")}
-          onMouseEnter={e=>{ if(page!=="work") e.currentTarget.style.color=C.ink; }}
-          onMouseLeave={e=>{ if(page!=="work") e.currentTarget.style.color=C.muted; }}>
-          Work
-        </button>
-        <button onClick={()=>go("about")} style={linkStyle("about")}
-          onMouseEnter={e=>{ if(page!=="about") e.currentTarget.style.color=C.ink; }}
-          onMouseLeave={e=>{ if(page!=="about") e.currentTarget.style.color=C.muted; }}>
-          About
-        </button>
-      </div>
+    <>
+      <nav className="side-pad" style={{ position:"fixed",top:0,left:0,right:0,zIndex:100,display:"flex",justifyContent:"space-between",alignItems:"center",padding:"20px 64px",background:"rgba(242,237,228,0.92)",backdropFilter:"blur(14px)" }}>
+        {!isMobile && (
+          <div style={{ display:"flex", gap:36 }}>
+            <button onClick={()=>go("work")} style={linkStyle("work")}
+              onMouseEnter={e=>{ if(page!=="work") e.currentTarget.style.color=C.ink; }}
+              onMouseLeave={e=>{ if(page!=="work") e.currentTarget.style.color=C.muted; }}>
+              Work
+            </button>
+            <button onClick={()=>go("about")} style={linkStyle("about")}
+              onMouseEnter={e=>{ if(page!=="about") e.currentTarget.style.color=C.ink; }}
+              onMouseLeave={e=>{ if(page!=="about") e.currentTarget.style.color=C.muted; }}>
+              About
+            </button>
+          </div>
+        )}
 
-      <button onClick={()=>go("home")} style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:20,fontWeight:700,fontStyle:"italic",color:C.ink,textDecoration:"none",background:"none",border:"none",cursor:"pointer" }}>
-        Laura Marin
-      </button>
-
-      <div style={{ display:"flex", gap:36 }}>
-        <button onClick={()=>go("contact")} style={linkStyle("contact")}
-          onMouseEnter={e=>{ if(page!=="contact") e.currentTarget.style.color=C.ink; }}
-          onMouseLeave={e=>{ if(page!=="contact") e.currentTarget.style.color=C.muted; }}>
-          Contact
+        <button onClick={()=>navigate("home")} style={{ fontFamily:"'Playfair Display',Georgia,serif",fontSize:20,fontWeight:700,fontStyle:"italic",color:C.ink,textDecoration:"none",background:"none",border:"none",cursor:"pointer" }}>
+          Laura Marin
         </button>
-        <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer"
-          style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:600,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
-          onMouseEnter={e=>e.currentTarget.style.color=C.ink}
-          onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
-          Resume ↗
-        </a>
-      </div>
-    </nav>
+
+        {!isMobile ? (
+          <div style={{ display:"flex", gap:36 }}>
+            <button onClick={()=>go("contact")} style={linkStyle("contact")}
+              onMouseEnter={e=>{ if(page!=="contact") e.currentTarget.style.color=C.ink; }}
+              onMouseLeave={e=>{ if(page!=="contact") e.currentTarget.style.color=C.muted; }}>
+              Contact
+            </button>
+            <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer"
+              style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:600,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
+              onMouseEnter={e=>e.currentTarget.style.color=C.ink}
+              onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
+              Resume ↗
+            </a>
+          </div>
+        ) : (
+          <button onClick={()=>setMenuOpen(o=>!o)} style={{ background:"none",border:"none",cursor:"pointer",padding:4,display:"flex",flexDirection:"column",gap:5,justifyContent:"center" }}>
+            {menuOpen ? (
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <line x1="2" y1="2" x2="20" y2="20" stroke={C.ink} strokeWidth="2" strokeLinecap="round"/>
+                <line x1="20" y1="2" x2="2" y2="20" stroke={C.ink} strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <>
+                <span style={{ width:22,height:2,background:C.ink,display:"block",borderRadius:2 }}/>
+                <span style={{ width:22,height:2,background:C.ink,display:"block",borderRadius:2 }}/>
+                <span style={{ width:22,height:2,background:C.ink,display:"block",borderRadius:2 }}/>
+              </>
+            )}
+          </button>
+        )}
+      </nav>
+
+      {isMobile && menuOpen && (
+        <div style={{ position:"fixed",top:0,left:0,right:0,bottom:0,background:C.bg,zIndex:99,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:32 }}>
+          {["work","about","contact"].map(p=>(
+            <button key={p} onClick={()=>navigate(p)} style={menuLinkStyle}
+              onMouseEnter={e=>e.currentTarget.style.color=C.rose}
+              onMouseLeave={e=>e.currentTarget.style.color=C.ink}>
+              {p.charAt(0).toUpperCase()+p.slice(1)}
+            </button>
+          ))}
+          <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer" onClick={()=>setMenuOpen(false)}
+            style={{ ...menuLinkStyle, color:C.muted }}>
+            Resume ↗
+          </a>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -515,7 +578,7 @@ function WorkIndex({ onSelect }) {
         <p style={{ ...a(0.1),fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,letterSpacing:"0.12em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>Selected Work</p>
         <h1 style={{ ...a(0.25),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(48px,6vw,80px)",color:C.ink,lineHeight:1.05 }}>Case Studies</h1>
       </div>
-      <div className="side-pad" style={{ padding:"0 64px 100px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:20 }}>
+      <div className="side-pad" style={{ padding:"0 64px 100px",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20 }}>
         {CASE_STUDIES.map((cs,i)=>(
           <Reveal key={cs.id} delay={i*0.07}>
             <WorkCard cs={cs} onSelect={onSelect}/>
@@ -552,25 +615,26 @@ function WorkCard({ cs, wide, onSelect }) {
 
 function CaseStudyDetail({ cs, onBack }) {
   const a = (d) => ({ opacity:0, animation:`fadeUp 0.7s ease ${d}s forwards` });
+  const isMobile = useIsMobile();
   const nextCs = CASE_STUDIES[(CASE_STUDIES.findIndex(c=>c.id===cs.id)+1) % CASE_STUDIES.length];
 
   return (
     <div className="page-enter">
 
       {/* ── Header ── */}
-      <div className="side-pad" style={{ padding:"120px 64px 48px",position:"relative",overflow:"hidden" }}>
-        <FlowerDaisy style={{ position:"absolute",top:100,right:0,opacity:0.08,transform:"scale(3)",pointerEvents:"none" }}/>
-        <button onClick={onBack} style={{ ...a(0.05),fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,background:"none",border:"none",cursor:"pointer",marginBottom:32,display:"block",transition:"color 0.2s" }}
+      <div className="side-pad" style={{ padding:isMobile?"88px 24px 32px":"120px 64px 48px",position:"relative",overflow:"hidden" }}>
+        {!isMobile && <FlowerDaisy style={{ position:"absolute",top:100,right:0,opacity:0.08,transform:"scale(3)",pointerEvents:"none" }}/>}
+        <button onClick={onBack} style={{ ...a(0.05),fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,background:"none",border:"none",cursor:"pointer",marginBottom:24,display:"block",transition:"color 0.2s" }}
           onMouseEnter={e=>e.currentTarget.style.color=C.ink}
           onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
           ← All work
         </button>
-        <h1 style={{ ...a(0.2),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(32px,3.5vw,52px)",color:C.ink,lineHeight:1.1,whiteSpace:"nowrap" }}>{cs.title}</h1>
+        <h1 style={{ ...a(0.2),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:isMobile?"clamp(22px,6vw,32px)":"clamp(32px,3.5vw,52px)",color:C.ink,lineHeight:1.1,whiteSpace:isMobile?"normal":"nowrap" }}>{cs.title}</h1>
       </div>
 
       {/* ── Hero image ── */}
-      <div className="side-pad" style={{ padding:"0 64px 72px" }}>
-        <div style={{ borderRadius:24,overflow:"hidden",background:cs.bg,minHeight:480,display:"flex",alignItems:"center",justifyContent:"center",position:"relative" }}>
+      <div className="side-pad" style={{ padding:isMobile?"0 24px 40px":"0 64px 72px" }}>
+        <div style={{ borderRadius:16,overflow:"hidden",background:cs.bg,minHeight:isMobile?180:480,display:"flex",alignItems:"center",justifyContent:"center",position:"relative" }}>
           {cs.heroImage
             ? <img src={cs.heroImage} alt={cs.title} style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
             : <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,letterSpacing:"0.15em",textTransform:"uppercase",color:"rgba(255,255,255,0.2)" }}>Add hero image</span>
@@ -580,49 +644,75 @@ function CaseStudyDetail({ cs, onBack }) {
 
       {/* ── Meta sidebar + Overview ── */}
       <Reveal>
-        <div className="side-pad" style={{ padding:"56px 64px 100px" }}><div style={{ display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start",maxWidth:900,margin:"0 auto" }}>
-          {/* Left: role / platform / contribution */}
-          <div style={{ display:"flex",flexDirection:"column",gap:52 }}>
-            {[
-              ["ROLE",         cs.role,         C.rose],
-              ["PLATFORM",     cs.platform,     "#4A7B9D"],
-              ["CONTRIBUTION", cs.contribution, "#6A8A5A"],
-            ].map(([label,val,color])=>(
-              <div key={label}>
-                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:10 }}>{label}</p>
-                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:17,color:C.ink,lineHeight:1.65 }}>{val}</p>
+        <div className="side-pad" style={{ padding:isMobile?"32px 24px 56px":"56px 64px 100px" }}>
+          {isMobile ? (
+            <div>
+              <div style={{ display:"flex",flexWrap:"wrap",gap:"24px 40px",marginBottom:32 }}>
+                {[
+                  ["ROLE",cs.role,C.rose],
+                  ["PLATFORM",cs.platform,"#4A7B9D"],
+                  ["CONTRIBUTION",cs.contribution,"#6A8A5A"],
+                ].map(([label,val,color])=>(
+                  <div key={label}>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:6 }}>{label}</p>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.ink,lineHeight:1.55,whiteSpace:"pre-line" }}>{val}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {/* Right: overview text + metrics */}
-          <div>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(16px,1.7vw,19px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:48 }}>{cs.overview}</p>
-            <div style={{ display:"flex",gap:40,flexWrap:"wrap" }}>
-              {cs.metrics.map(([num,label])=>(
-                <div key={label} style={{ borderTop:`2px solid ${C.rose}`,paddingTop:16,minWidth:100 }}>
-                  <p style={{ fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:700,color:C.ink,marginBottom:4 }}>{num}</p>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted }}>{label}</p>
-                </div>
-              ))}
+              <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:300,color:"#4A4438",lineHeight:1.85 }}>{cs.overview}</p>
             </div>
-          </div>
-        </div></div>
+          ) : (
+            <div style={{ display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start",maxWidth:900,margin:"0 auto" }}>
+              <div style={{ display:"flex",flexDirection:"column",gap:52 }}>
+                {[
+                  ["ROLE",         cs.role,         C.rose],
+                  ["PLATFORM",     cs.platform,     "#4A7B9D"],
+                  ["CONTRIBUTION", cs.contribution, "#6A8A5A"],
+                ].map(([label,val,color])=>(
+                  <div key={label}>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:600,letterSpacing:"0.14em",textTransform:"uppercase",color,marginBottom:10 }}>{label}</p>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:17,color:C.ink,lineHeight:1.65,whiteSpace:"pre-line" }}>{val}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(16px,1.7vw,19px)",fontWeight:300,color:"#4A4438",lineHeight:1.9,marginBottom:48 }}>{cs.overview}</p>
+                <div style={{ display:"flex",gap:40,flexWrap:"wrap" }}>
+                  {cs.metrics.map(([num,label])=>(
+                    <div key={label} style={{ borderTop:`2px solid ${C.rose}`,paddingTop:16,minWidth:100 }}>
+                      <p style={{ fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:700,color:C.ink,marginBottom:4 }}>{num}</p>
+                      <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted }}>{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </Reveal>
 
       {/* ── Gallery sections ── */}
       {cs.gallery && cs.gallery.map((section,si)=>{
         const cols   = section.columns ?? (section.images?.length===1?1:section.images?.length===2?2:3);
-        const gridTemplate = section.gridTemplate ?? `repeat(${cols},1fr)`;
-        const gap    = section.gap ?? (section.imageCaptions ? 20 : 16);
+        const mobileCols = cols >= 5 ? 3 : cols;
+        const effectiveCols = isMobile ? mobileCols : cols;
+        const gridTemplate = isMobile
+          ? (cols >= 5 ? `repeat(3,1fr)` : (section.gridTemplate ?? `repeat(${mobileCols},1fr)`))
+          : (section.gridTemplate ?? `repeat(${cols},1fr)`);
+        const gap    = isMobile ? (section.gap ? Math.round(section.gap * 0.4) : 10) : (section.gap ?? (section.imageCaptions ? 20 : 16));
         const radius = section.borderRadius ?? 16;
+        const effectiveMaxWidth = isMobile ? "100%" : (section.maxWidth ?? "100%");
+        const effectiveItemHeight = isMobile
+          ? (section.itemHeight ? Math.round(section.itemHeight * 0.3) : undefined)
+          : section.itemHeight;
         return (
           <Reveal key={si}>
-            <div className="side-pad" style={{ padding:"0 64px 72px" }}>
+            <div className="side-pad" style={{ padding:isMobile?"0 24px 48px":"0 64px 72px" }}>
               {section.label && (
                 <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
               )}
               {section.images && section.images.length > 0 ? (
-                <div style={{ maxWidth:section.maxWidth??"100%",margin:"0 auto" }}>
+                <div style={{ maxWidth:effectiveMaxWidth,margin:"0 auto" }}>
                 <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
                   {section.images.map((src,ii)=>{
                     const isVideo = /\.(mp4|mov|webm)$/i.test(src);
@@ -630,8 +720,8 @@ function CaseStudyDetail({ cs, onBack }) {
                       <div key={ii}>
                         <div style={{ borderRadius:radius,overflow:"hidden" }}>
                           {isVideo
-                            ? <video src={src} autoPlay muted loop playsInline style={{ width:section.itemHeight?"auto":"100%",height:section.itemHeight?section.itemHeight+"px":"auto",display:"block" }}/>
-                            : <img src={src} alt="" style={{ width:section.itemHeight?"auto":"100%",height:section.itemHeight?section.itemHeight+"px":"auto",display:"block" }}/>
+                            ? <video src={src} autoPlay muted loop playsInline style={{ width:effectiveItemHeight?"auto":"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block" }}/>
+                            : <img src={src} alt="" style={{ width:effectiveItemHeight?"auto":"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block" }}/>
                           }
                         </div>
                         {section.imageCaptions?.[ii] && (
@@ -658,7 +748,7 @@ function CaseStudyDetail({ cs, onBack }) {
       {/* ── Impact ── */}
       {cs.impact && (
         <Reveal>
-          <div className="side-pad" style={{ padding:"20px 64px 96px",display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start" }}>
+          <div className="side-pad" style={{ padding:isMobile?"20px 24px 72px":"20px 64px 96px",display:"grid",gridTemplateColumns:isMobile?"1fr":"200px 1fr",gap:isMobile?24:88,alignItems:"start" }}>
             <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(28px,3vw,40px)",color:C.ink }}>Impact</h2>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:0 }}>
               {cs.impact.map((item,i)=>{
