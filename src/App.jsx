@@ -21,8 +21,8 @@ const C = {
 const G = `
   @import url('${FONT_URL}');
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body,#root{background:${C.bg};color:${C.ink};font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body,#root{background:${C.bg};color:${C.ink};font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
   @keyframes float1{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(-2deg)}}
   @keyframes float2{0%,100%{transform:translateY(0) rotate(8deg)}50%{transform:translateY(-18px) rotate(12deg)}}
   @keyframes float3{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(3deg)}}
@@ -571,14 +571,15 @@ function WorkPage() {
 
 function WorkIndex({ onSelect }) {
   const a = (d) => ({ opacity:0, animation:`fadeUp 0.7s ease ${d}s forwards` });
+  const isMobile = useIsMobile();
   return (
     <div className="page-enter">
-      <div className="side-pad" style={{ padding:"120px 64px 72px",position:"relative",overflow:"hidden" }}>
-        <FlowerPeony style={{ position:"absolute",top:80,right:0,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>
+      <div className="side-pad" style={{ padding:isMobile?"88px 24px 48px":"120px 64px 72px",position:"relative",overflow:"hidden" }}>
+        {!isMobile && <FlowerPeony style={{ position:"absolute",top:80,right:0,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>}
         <p style={{ ...a(0.1),fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,letterSpacing:"0.12em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>Selected Work</p>
         <h1 style={{ ...a(0.25),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(48px,6vw,80px)",color:C.ink,lineHeight:1.05 }}>Case Studies</h1>
       </div>
-      <div className="side-pad" style={{ padding:"0 64px 100px",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20 }}>
+      <div className="side-pad" style={{ padding:isMobile?"0 24px 72px":"0 64px 100px",display:"grid",gridTemplateColumns:isMobile?"1fr":"repeat(auto-fit,minmax(300px,1fr))",gap:20 }}>
         {CASE_STUDIES.map((cs,i)=>(
           <Reveal key={cs.id} delay={i*0.07}>
             <WorkCard cs={cs} onSelect={onSelect}/>
@@ -700,7 +701,7 @@ function CaseStudyDetail({ cs, onBack }) {
           ? (cols >= 5 ? `repeat(3,1fr)` : (section.gridTemplate ?? `repeat(${mobileCols},1fr)`))
           : (section.gridTemplate ?? `repeat(${cols},1fr)`);
         const gap    = isMobile ? (section.gap ? Math.round(section.gap * 0.4) : 10) : (section.gap ?? (section.imageCaptions ? 20 : 16));
-        const radius = section.borderRadius ?? 16;
+        const radius = isMobile ? Math.round((section.borderRadius ?? 16) * 0.5) : (section.borderRadius ?? 16);
         const effectiveMaxWidth = isMobile ? "100%" : (section.maxWidth ?? "100%");
         const effectiveItemHeight = isMobile
           ? (section.itemHeight ? Math.round(section.itemHeight * 0.3) : undefined)
@@ -720,8 +721,8 @@ function CaseStudyDetail({ cs, onBack }) {
                       <div key={ii}>
                         <div style={{ borderRadius:radius,overflow:"hidden" }}>
                           {isVideo
-                            ? <video src={src} autoPlay muted loop playsInline style={{ width:effectiveItemHeight?"auto":"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block" }}/>
-                            : <img src={src} alt="" style={{ width:effectiveItemHeight?"auto":"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block" }}/>
+                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block",objectFit:effectiveItemHeight?"cover":undefined }}/>
+                            : <img src={src} alt="" style={{ width:"100%",height:effectiveItemHeight?effectiveItemHeight+"px":"auto",display:"block",objectFit:effectiveItemHeight?"cover":undefined }}/>
                           }
                         </div>
                         {section.imageCaptions?.[ii] && (
@@ -750,12 +751,12 @@ function CaseStudyDetail({ cs, onBack }) {
         <Reveal>
           <div className="side-pad" style={{ padding:isMobile?"20px 24px 72px":"20px 64px 96px",display:"grid",gridTemplateColumns:isMobile?"1fr":"200px 1fr",gap:isMobile?24:88,alignItems:"start" }}>
             <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(28px,3vw,40px)",color:C.ink }}>Impact</h2>
-            <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:0 }}>
+            <div style={{ display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:0 }}>
               {cs.impact.map((item,i)=>{
-                const isLeft = i % 2 === 0;
-                const isTop  = i < 2;
+                const isLeft = isMobile ? false : i % 2 === 0;
+                const isTop  = isMobile ? i < (cs.impact.length - 1) : i < 2;
                 return (
-                  <div key={i} style={{ padding:"32px 40px 32px 0",borderBottom:isTop?`1px dashed ${C.pill}`:"none",borderRight:isLeft?`1px dashed ${C.pill}`:"none",paddingRight:isLeft?40:0,paddingLeft:isLeft?0:40 }}>
+                  <div key={i} style={{ padding:"32px 0",borderBottom:isTop?`1px dashed ${C.pill}`:"none",borderRight:isLeft?`1px dashed ${C.pill}`:"none",paddingRight:isLeft?40:0,paddingLeft:isLeft?0:(isMobile?0:40) }}>
                     <div style={{ width:44,height:44,borderRadius:"50%",background:item.color,marginBottom:16 }}/>
                     <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.ink,lineHeight:1.75,maxWidth:280 }}>{item.text}</p>
                   </div>
