@@ -925,7 +925,7 @@ function AboutPage() {
               Lately I've been leaning into AI-powered workflows — using Claude, Lovable, and Replit alongside Figma and ProtoPie to compress prototyping cycles and bring ideas to life faster.
             </p>
             <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.5vw,17px)",fontWeight:300,color:"#4A4438",lineHeight:1.9 }}>
-              Beyond the screen, I founded <strong style={{ fontWeight:500,color:C.ink }}>Second Star Events</strong> and give back through the <strong style={{ fontWeight:500,color:C.ink }}>Neverland Foundation</strong>.
+              Because my love for crafting immersive experiences doesn't stop at the screen, I also founded <strong style={{ fontWeight:500,color:C.ink }}>Second Star Events</strong>, a luxury events company producing large-scale themed experiences for thousands of guests across multiple U.S. cities. Through this, I've been able to make a true impact on the local level through our <strong style={{ fontWeight:500,color:C.ink }}>Neverland Foundation</strong>, and have gotten to partner with some amazing companies, such as Leftfield Media/AwesomeCon, to craft some really cool events!
             </p>
           </Reveal>
           <Reveal delay={0.15}>
