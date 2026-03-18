@@ -624,10 +624,10 @@ function CaseStudyDetail({ cs, onBack }) {
                     const isVideo = /\.(mp4|mov|webm)$/i.test(src);
                     return (
                       <div key={ii}>
-                        <div style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:ar }}>
+                        <div style={{ borderRadius:16,overflow:"hidden" }}>
                           {isVideo
-                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"100%",objectFit:"contain",display:"block" }}/>
-                            : <img src={src} alt="" style={{ width:"100%",height:"100%",objectFit:"contain" }}/>
+                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"auto",display:"block" }}/>
+                            : <img src={src} alt="" style={{ width:"100%",height:"auto",display:"block" }}/>
                           }
                         </div>
                         {section.imageCaptions?.[ii] && (
