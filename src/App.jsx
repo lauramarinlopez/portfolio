@@ -289,6 +289,7 @@ const PROJECTS = [
 
 function HomePage() {
   const { go, goWork } = useRouter();
+  const isMobile = useIsMobile();
   const a = (d) => ({ opacity:0, animation:`fadeUp 0.7s ease ${d}s forwards` });
   const btnPrimary = { display:"inline-block",background:C.ink,color:"#FAF8F4",fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,padding:"13px 30px",borderRadius:100,textDecoration:"none",transition:"background 0.2s,transform 0.2s",letterSpacing:"0.04em",border:"none",cursor:"pointer" };
 
@@ -324,7 +325,7 @@ function HomePage() {
               Get in touch →
             </button>
           </div>
-          <div style={{ ...a(0.8),display:"flex",gap:40,marginTop:56 }}>
+          <div style={{ ...a(0.8),display:"flex",gap:40,marginTop:56,paddingBottom:isMobile?64:0 }}>
             {[["131M+","users reached"],["6+","years experience"],["Columbia University","Computer Science, UX and Applications track"]].map(([num,label])=>(
               <div key={label}>
                 <p style={{ fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:C.ink }}>{num}</p>
