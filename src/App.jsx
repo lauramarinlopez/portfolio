@@ -284,7 +284,7 @@ function Footer() {
 const PROJECTS = [
   { id:"disney-com",      title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/portfolio/disney-com-cover.png" },
   { id:"napster-spaces",  title:"Napster Spaces",             desc:"Designed rich interactive experiences and a unified design system with 100+ components for Napster's web platform.", tags:["Product Design","Design Systems","Web"], bg:"linear-gradient(135deg,#1A0A2E,#3D1A6E)", cardImage:"/portfolio/napster-spaces-cover.png" },
-  { id:"napster-console", title:"Napster Console",            desc:"Designed the end-to-end artist and label management console for Napster — covering sign-up flows, modular dashboard architecture, and a scalable component system.", tags:["Product Design","Dashboard","Web"], bg:"linear-gradient(135deg,#0A1A2E,#1A3A6E)", cardImage:"/portfolio/napster-console/hero.png" },
+  { id:"napster-console", title:"Napster Console",            desc:"Designed the end-to-end artist and label management console for Napster — covering sign-up flows, modular dashboard architecture, and a scalable component system.", tags:["Product Design","Dashboard","Web","Onboarding Flow"], bg:"linear-gradient(135deg,#0A1A2E,#1A3A6E)", cardImage:"/portfolio/napster-console/hero.png" },
 ];
 
 function HomePage() {
@@ -509,7 +509,7 @@ const CASE_STUDIES = [
     id:"napster-console",
     title:"Napster Console",
     subtitle:"A modular creator platform built for artists and labels",
-    tags:["Product Design","Dashboard","Web"],
+    tags:["Product Design","Dashboard","Web","Onboarding Flow"],
     bg:"linear-gradient(135deg,#0A1A2E,#1A3A6E)",
     year:"2025–2026",
     role:"Lead designer",
