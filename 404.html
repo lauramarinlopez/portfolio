@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <script>
+      // GitHub Pages SPA redirect trick
+      // Stores the path in sessionStorage and redirects to the base URL
+      var base = '/portfolio';
+      var path = window.location.pathname.replace(base, '') || '/';
+      sessionStorage.setItem('spa_redirect', path);
+      window.location.replace(window.location.origin + base + '/');
+    </script>
+  </head>
+  <body></body>
+</html>

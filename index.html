@@ -3,9 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+    <script>
+      // Restore path from 404 redirect
+      (function() {
+        var redirect = sessionStorage.getItem('spa_redirect');
+        if (redirect && redirect !== '/') {
+          sessionStorage.removeItem('spa_redirect');
+          window.history.replaceState(null, '', '/portfolio' + redirect);
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Laura Marin's Portfolio</title>
-    <script type="module" crossorigin src="/portfolio/assets/index-f1e1d01f.js"></script>
+    <script type="module" crossorigin src="/portfolio/assets/index-3b8667e1.js"></script>
     <link rel="stylesheet" href="/portfolio/assets/index-e3b0c442.css">
   </head>
   <body>
