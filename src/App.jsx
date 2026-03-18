@@ -658,7 +658,7 @@ function CaseStudyDetail({ cs, onBack }) {
       {/* ── Impact ── */}
       {cs.impact && (
         <Reveal>
-          <div className="side-pad" style={{ padding:"0 64px 96px",display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start" }}>
+          <div className="side-pad" style={{ padding:"20px 64px 96px",display:"grid",gridTemplateColumns:"200px 1fr",gap:88,alignItems:"start" }}>
             <h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(28px,3vw,40px)",color:C.ink }}>Impact</h2>
             <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:0 }}>
               {cs.impact.map((item,i)=>{
