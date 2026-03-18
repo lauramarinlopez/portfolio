@@ -373,7 +373,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-motion-brandtiles.png",
           "/portfolio/disney/disney-motion-2.mov",
         ],
-        gridTemplate:"276fr 416fr 331fr", gap:69, paddingX:75, borderRadius:25,
+        gridTemplate:"276fr 416fr 331fr", gap:69, maxWidth:1161, borderRadius:25,
         imageCaptions:["Fireworks celebratory moment","Brand tiles","Design and motion"],
         captionMarginTop:30,
       },
@@ -383,7 +383,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-iteration-1.png",
           "/portfolio/disney/disney-iteration-2.png",
         ],
-        gridTemplate:"719fr 418fr", gap:53, paddingLeft:63, paddingRight:59, borderRadius:10,
+        gridTemplate:"719fr 418fr", gap:53, maxWidth:1190, borderRadius:10,
       },
       {
         label:"Final Versions: Brands",
@@ -615,8 +615,6 @@ function CaseStudyDetail({ cs, onBack }) {
         const gridTemplate = section.gridTemplate ?? `repeat(${cols},1fr)`;
         const gap    = section.gap ?? (section.imageCaptions ? 20 : 16);
         const radius = section.borderRadius ?? 16;
-        const pl = section.paddingX ?? section.paddingLeft ?? 0;
-        const pr = section.paddingX ?? section.paddingRight ?? 0;
         return (
           <Reveal key={si}>
             <div className="side-pad" style={{ padding:"0 64px 72px" }}>
@@ -624,7 +622,8 @@ function CaseStudyDetail({ cs, onBack }) {
                 <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
               )}
               {section.images && section.images.length > 0 ? (
-                <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start",paddingLeft:pl,paddingRight:pr }}>
+                <div style={{ maxWidth:section.maxWidth??"100%",margin:"0 auto" }}>
+                <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
                   {section.images.map((src,ii)=>{
                     const isVideo = /\.(mp4|mov|webm)$/i.test(src);
                     return (
@@ -641,6 +640,7 @@ function CaseStudyDetail({ cs, onBack }) {
                       </div>
                     );
                   })}
+                </div>
                 </div>
               ) : (
                 <div style={{ borderRadius:16,background:C.cardA,aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center" }}>
