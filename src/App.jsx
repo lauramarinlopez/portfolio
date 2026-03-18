@@ -517,7 +517,7 @@ const CASE_STUDIES = [
     contribution:"Product Design,\nDesign Systems,\nVisual Design",
     heroImage:"/portfolio/napster-console/hero.png",
     cardImage:"/portfolio/napster-console/hero.png",
-    overview:"Designed Napster Console — an artist and label management platform built for web and mobile. Led end-to-end design across the sign-up experience and modular dashboard, creating a scalable interface that gives creators full control over their presence on the platform.",
+    overview:"Designed the new onboarding flow and modular dashboard concept for Napster Console. Led end-to-end design and worked closely with the CTO and company leadership, creating a scalable interface that gives users full control over their virtual worlds on the platform.",
     metrics:[],
     gallery:[
       {
