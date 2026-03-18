@@ -373,7 +373,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-motion-1.mp4",
           "/portfolio/disney/disney-motion-2.mov",
         ],
-        gridTemplate:"416fr 276fr 331fr", gap:22, borderRadius:25,
+        gridTemplate:"416fr 276fr 331fr", gap:144, borderRadius:25,
         imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
       },
       {
@@ -382,7 +382,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-iteration-1.png",
           "/portfolio/disney/disney-iteration-2.png",
         ],
-        gridTemplate:"719fr 418fr", gap:22, borderRadius:10,
+        gridTemplate:"719fr 418fr", gap:175, borderRadius:10,
       },
       {
         label:"Final Versions: Brands",
