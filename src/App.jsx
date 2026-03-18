@@ -373,7 +373,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-motion-1.mp4",
           "/portfolio/disney/disney-motion-2.mov",
         ],
-        gridTemplate:"416fr 276fr 331fr", gap:69, maxWidth:1161, borderRadius:25,
+        gridTemplate:"416fr 276fr 331fr", gap:69, maxWidth:1161, borderRadius:25, itemHeight:602,
         imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
         captionMarginTop:30,
       },
@@ -630,8 +630,8 @@ function CaseStudyDetail({ cs, onBack }) {
                       <div key={ii}>
                         <div style={{ borderRadius:radius,overflow:"hidden" }}>
                           {isVideo
-                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"auto",display:"block" }}/>
-                            : <img src={src} alt="" style={{ width:"100%",height:"auto",display:"block" }}/>
+                            ? <video src={src} autoPlay muted loop playsInline style={{ width:section.itemHeight?"auto":"100%",height:section.itemHeight?section.itemHeight+"px":"auto",display:"block" }}/>
+                            : <img src={src} alt="" style={{ width:section.itemHeight?"auto":"100%",height:section.itemHeight?section.itemHeight+"px":"auto",display:"block" }}/>
                           }
                         </div>
                         {section.imageCaptions?.[ii] && (
