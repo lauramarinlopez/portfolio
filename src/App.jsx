@@ -378,8 +378,8 @@ const CASE_STUDIES = [
         label:"Designing for motion",
         images:[
           "/portfolio/disney/disney-motion-brandtiles.png",
-          "/portfolio/disney/disney-motion-fireworks.png",
-          "/portfolio/disney/disney-motion-progress.png",
+          "/portfolio/disney/disney-motion-1.mp4",
+          "/portfolio/disney/disney-motion-2.mov",
         ],
         columns:3, aspectRatio:"9/16",
         imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
@@ -387,11 +387,11 @@ const CASE_STUDIES = [
       {
         label:"Final Versions: Brands",
         images:[
-          "/portfolio/disney/disney-brand-pixar.png",
-          "/portfolio/disney/disney-brand-hulu.png",
-          "/portfolio/disney/disney-brand-espn.png",
-          "/portfolio/disney/disney-brand-avatar.png",
-          "/portfolio/disney/disney-brand-natgeo.png",
+          "/portfolio/disney/disney-brand-pixar.mp4",
+          "/portfolio/disney/disney-brand-hulu.mp4",
+          "/portfolio/disney/disney-brand-espn.mp4",
+          "/portfolio/disney/disney-brand-avatar.mp4",
+          "/portfolio/disney/disney-brand-natgeo.mp4",
         ],
         columns:5, aspectRatio:"9/16",
       },
@@ -403,11 +403,11 @@ const CASE_STUDIES = [
       {
         label:"Final Versions: Sections",
         images:[
-          "/portfolio/disney/disney-sections-1.png",
-          "/portfolio/disney/disney-sections-2.png",
-          "/portfolio/disney/disney-sections-3.png",
-          "/portfolio/disney/disney-sections-4.png",
-          "/portfolio/disney/disney-sections-5.png",
+          "/portfolio/disney/disney-sections-1.mp4",
+          "/portfolio/disney/disney-sections-2.mp4",
+          "/portfolio/disney/disney-sections-3.mp4",
+          "/portfolio/disney/disney-sections-4.mp4",
+          "/portfolio/disney/disney-sections-5.mp4",
         ],
         columns:5, aspectRatio:"9/16",
       },
@@ -620,16 +620,22 @@ function CaseStudyDetail({ cs, onBack }) {
               )}
               {section.images && section.images.length > 0 ? (
                 <div style={{ display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap:section.imageCaptions?20:16,alignItems:"start" }}>
-                  {section.images.map((img,ii)=>(
-                    <div key={ii}>
-                      <div style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:ar }}>
-                        <img src={img} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
+                  {section.images.map((src,ii)=>{
+                    const isVideo = /\.(mp4|mov|webm)$/i.test(src);
+                    return (
+                      <div key={ii}>
+                        <div style={{ borderRadius:16,overflow:"hidden",background:C.cardB,aspectRatio:ar }}>
+                          {isVideo
+                            ? <video src={src} autoPlay muted loop playsInline style={{ width:"100%",height:"100%",objectFit:"cover",display:"block" }}/>
+                            : <img src={src} alt="" style={{ width:"100%",height:"100%",objectFit:"cover" }}/>
+                          }
+                        </div>
+                        {section.imageCaptions?.[ii] && (
+                          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:10,textAlign:"center" }}>{section.imageCaptions[ii]}</p>
+                        )}
                       </div>
-                      {section.imageCaptions?.[ii] && (
-                        <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:10,textAlign:"center" }}>{section.imageCaptions[ii]}</p>
-                      )}
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div style={{ borderRadius:16,background:C.cardA,aspectRatio:"16/9",display:"flex",alignItems:"center",justifyContent:"center" }}>
