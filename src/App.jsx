@@ -373,7 +373,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-motion-1.mp4",
           "/portfolio/disney/disney-motion-2.mov",
         ],
-        columns:3, gap:22, borderRadius:25,
+        gridTemplate:"416fr 276fr 331fr", gap:22, borderRadius:25,
         imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
       },
       {
@@ -382,7 +382,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-iteration-1.png",
           "/portfolio/disney/disney-iteration-2.png",
         ],
-        columns:2, gap:22, borderRadius:10,
+        gridTemplate:"719fr 418fr", gap:22, borderRadius:10,
       },
       {
         label:"Final Versions: Brands",
@@ -611,6 +611,7 @@ function CaseStudyDetail({ cs, onBack }) {
       {/* ── Gallery sections ── */}
       {cs.gallery && cs.gallery.map((section,si)=>{
         const cols   = section.columns ?? (section.images?.length===1?1:section.images?.length===2?2:3);
+        const gridTemplate = section.gridTemplate ?? `repeat(${cols},1fr)`;
         const gap    = section.gap ?? (section.imageCaptions ? 20 : 16);
         const radius = section.borderRadius ?? 16;
         return (
@@ -620,7 +621,7 @@ function CaseStudyDetail({ cs, onBack }) {
                 <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
               )}
               {section.images && section.images.length > 0 ? (
-                <div style={{ display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap,alignItems:"start" }}>
+                <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
                   {section.images.map((src,ii)=>{
                     const isVideo = /\.(mp4|mov|webm)$/i.test(src);
                     return (
