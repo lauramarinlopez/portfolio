@@ -620,7 +620,6 @@ function WorkIndex({ onSelect }) {
     <div className="page-enter">
       <div className="side-pad" style={{ padding:isMobile?"88px 24px 48px":"120px 64px 72px",position:"relative",overflow:"hidden" }}>
         {!isMobile && <FlowerPeony style={{ position:"absolute",top:80,right:0,opacity:0.1,transform:"scale(3)",pointerEvents:"none" }}/>}
-        <p style={{ ...a(0.1),fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,letterSpacing:"0.12em",textTransform:"uppercase",color:C.accent,marginBottom:16 }}>Selected Work</p>
         <h1 style={{ ...a(0.25),fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(48px,6vw,80px)",color:C.ink,lineHeight:1.05 }}>Projects</h1>
         <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,fontWeight:300,color:C.muted,marginTop:16,lineHeight:1.7 }}>Most of my work is under NDAs, but here are some projects that I've worked on!</p>
       </div>
