@@ -369,12 +369,13 @@ const CASE_STUDIES = [
       {
         label:"Design and Interaction — First Iterations",
         images:[
-          "/portfolio/disney/disney-motion-brandtiles.png",
           "/portfolio/disney/disney-motion-1.mp4",
+          "/portfolio/disney/disney-motion-brandtiles.png",
           "/portfolio/disney/disney-motion-2.mov",
         ],
-        gridTemplate:"416fr 276fr 331fr", gap:144, borderRadius:25,
-        imageCaptions:["Brand tiles","Fireworks celebratory moment","Design and motion"],
+        gridTemplate:"276fr 416fr 331fr", gap:69, paddingX:75, borderRadius:25,
+        imageCaptions:["Fireworks celebratory moment","Brand tiles","Design and motion"],
+        captionMarginTop:30,
       },
       {
         label:"Designing for motion",
@@ -382,7 +383,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-iteration-1.png",
           "/portfolio/disney/disney-iteration-2.png",
         ],
-        gridTemplate:"719fr 418fr", gap:175, borderRadius:10,
+        gridTemplate:"719fr 418fr", gap:53, paddingLeft:63, paddingRight:59, borderRadius:10,
       },
       {
         label:"Final Versions: Brands",
@@ -614,6 +615,8 @@ function CaseStudyDetail({ cs, onBack }) {
         const gridTemplate = section.gridTemplate ?? `repeat(${cols},1fr)`;
         const gap    = section.gap ?? (section.imageCaptions ? 20 : 16);
         const radius = section.borderRadius ?? 16;
+        const pl = section.paddingX ?? section.paddingLeft ?? 0;
+        const pr = section.paddingX ?? section.paddingRight ?? 0;
         return (
           <Reveal key={si}>
             <div className="side-pad" style={{ padding:"0 64px 72px" }}>
@@ -621,7 +624,7 @@ function CaseStudyDetail({ cs, onBack }) {
                 <h3 style={{ fontFamily:"'DM Sans',sans-serif",fontSize:18,fontWeight:500,color:C.ink,marginBottom:24 }}>{section.label}</h3>
               )}
               {section.images && section.images.length > 0 ? (
-                <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
+                <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start",paddingLeft:pl,paddingRight:pr }}>
                   {section.images.map((src,ii)=>{
                     const isVideo = /\.(mp4|mov|webm)$/i.test(src);
                     return (
@@ -633,7 +636,7 @@ function CaseStudyDetail({ cs, onBack }) {
                           }
                         </div>
                         {section.imageCaptions?.[ii] && (
-                          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:10,textAlign:"center" }}>{section.imageCaptions[ii]}</p>
+                          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginTop:section.captionMarginTop??10,textAlign:"center" }}>{section.imageCaptions[ii]}</p>
                         )}
                       </div>
                     );
