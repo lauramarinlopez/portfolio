@@ -606,8 +606,10 @@ function PasswordGate({ onUnlock }) {
 function WorkPage() {
   const { workId, goWork } = useRouter();
   const selected = CASE_STUDIES.find(c => c.id === workId);
+  const [unlocked, setUnlocked] = useState(false);
   useEffect(() => { window.scrollTo(0,0); }, [workId]);
 
+  if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)}/>;
   return selected
     ? <CaseStudyDetail cs={selected} onBack={()=>goWork(null)}/>
     : <WorkIndex onSelect={(id)=>goWork(id)}/>;
