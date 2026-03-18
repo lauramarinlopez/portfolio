@@ -284,6 +284,7 @@ function Footer() {
 const PROJECTS = [
   { id:"disney-com",      title:"Disney.com Mobile Redesign", desc:"Redesigned the Disney.com mobile experience — a brand hub unifying Disney's full portfolio through immersive card-based screens and rich, annotated motion design.", tags:["Mobile Design","Motion Design","Disney"], bg:"linear-gradient(135deg,#3D1A00,#8B4500)", cardImage:"/portfolio/disney-com-cover.png" },
   { id:"napster-spaces",  title:"Napster Spaces",             desc:"Designed rich interactive experiences and a unified design system with 100+ components for Napster's web platform.", tags:["Product Design","Design Systems","Web"], bg:"linear-gradient(135deg,#1A0A2E,#3D1A6E)", cardImage:"/portfolio/napster-spaces-cover.png" },
+  { id:"napster-console", title:"Napster Console",            desc:"Designed the end-to-end artist and label management console for Napster — covering sign-up flows, modular dashboard architecture, and a scalable component system.", tags:["Product Design","Dashboard","Web"], bg:"linear-gradient(135deg,#0A1A2E,#1A3A6E)", cardImage:"/portfolio/napster-console/hero.png" },
 ];
 
 function HomePage() {
@@ -504,6 +505,51 @@ const CASE_STUDIES = [
       { color:"#6A8A5A", text:"Established a scalable visual language for the future of the product" },
     ],
   },
+  {
+    id:"napster-console",
+    title:"Napster Console",
+    subtitle:"A modular creator platform built for artists and labels",
+    tags:["Product Design","Dashboard","Web"],
+    bg:"linear-gradient(135deg,#0A1A2E,#1A3A6E)",
+    year:"2025–2026",
+    role:"Lead designer",
+    platform:"Web and Mobile",
+    contribution:"Product Design,\nDesign Systems,\nVisual Design",
+    heroImage:"/portfolio/napster-console/hero.png",
+    cardImage:"/portfolio/napster-console/hero.png",
+    overview:"Designed Napster Console — an artist and label management platform built for web and mobile. Led end-to-end design across the sign-up experience and modular dashboard, creating a scalable interface that gives creators full control over their presence on the platform.",
+    metrics:[],
+    gallery:[
+      {
+        label:"Sign up flow",
+        images:[
+          "/portfolio/napster-console/signup-1a.png",
+          "/portfolio/napster-console/signup-1b.png",
+          "/portfolio/napster-console/signup-2a.png",
+          "/portfolio/napster-console/signup-2b.png",
+          "/portfolio/napster-console/signup-3a.png",
+          "/portfolio/napster-console/signup-3b.png",
+        ],
+        gridTemplate:"954fr 248fr", gap:20, rowGap:48, borderRadius:8, mobileCols:1,
+      },
+      {
+        label:"Modular console",
+        images:[
+          "/portfolio/napster-console/console-1a.png",
+          "/portfolio/napster-console/console-1b.png",
+          "/portfolio/napster-console/console-2a.png",
+          "/portfolio/napster-console/console-2b.png",
+        ],
+        gridTemplate:"957fr 248fr", gap:20, rowGap:48, borderRadius:8, mobileCols:1,
+      },
+    ],
+    impact:[
+      { color:"#6A4A9A", text:"Designed a seamless artist onboarding flow from sign-up through first console experience" },
+      { color:"#4A7B9D", text:"Built a modular console architecture that adapts across artist, label, and admin roles" },
+      { color:"#A0522D", text:"Delivered rich interactive experiences across both web and mobile console interfaces" },
+      { color:"#6A8A5A", text:"Established a scalable visual system that extended the Napster brand to a creator-facing product" },
+    ],
+  },
 ];
 
 const WORK_PASSWORD = "LM26";
@@ -700,6 +746,7 @@ function CaseStudyDetail({ cs, onBack }) {
           ? (section.mobileGridTemplate ?? section.gridTemplate ?? `repeat(${mobileCols},1fr)`)
           : (section.gridTemplate ?? `repeat(${cols},1fr)`);
         const gap    = isMobile ? (section.gap ? Math.round(section.gap * 0.4) : 10) : (section.gap ?? (section.imageCaptions ? 20 : 16));
+        const rowGap = isMobile ? (section.rowGap ? Math.round(section.rowGap * 0.5) : gap) : (section.rowGap ?? gap);
         const radius = isMobile ? Math.round((section.borderRadius ?? 16) * 0.5) : (section.borderRadius ?? 16);
         const effectiveMaxWidth = isMobile ? "100%" : (section.maxWidth ?? "100%");
         const effectiveItemHeight = isMobile
@@ -748,7 +795,7 @@ function CaseStudyDetail({ cs, onBack }) {
                       </div>
                     </div>
                   ) : (
-                    <div style={{ display:"grid",gridTemplateColumns:gridTemplate,gap,alignItems:"start" }}>
+                    <div style={{ display:"grid",gridTemplateColumns:gridTemplate,columnGap:gap,rowGap,alignItems:"start" }}>
                       {activeImages.map((src,ii) => renderMediaItem(src, ii))}
                     </div>
                   )}
