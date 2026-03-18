@@ -421,7 +421,7 @@ const CASE_STUDIES = [
           "/portfolio/disney/disney-iteration-1.png",
           "/portfolio/disney/disney-iteration-2.png",
         ],
-        gridTemplate:"719fr 418fr", gap:53, maxWidth:1190, borderRadius:10, mobileCols:1,
+        gridTemplate:"719fr 418fr", gap:53, maxWidth:1190, borderRadius:10, mobileCols:1, mobileGridTemplate:"1fr",
       },
       {
         label:"Final Versions: Brands",
