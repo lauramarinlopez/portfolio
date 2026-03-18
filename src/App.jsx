@@ -862,13 +862,27 @@ function ContactPage() {
 // ═══════════════════════════════════════════════════════════════════════════════
 // ROOT APP — router lives here
 // ═══════════════════════════════════════════════════════════════════════════════
+const BASE = "/portfolio";
+
+function parseRoute() {
+  const path = window.location.pathname.replace(BASE, "") || "/";
+  if (path === "/" || path === "") return { page: "home", workId: null };
+  if (path === "/about")   return { page: "about",   workId: null };
+  if (path === "/contact") return { page: "contact", workId: null };
+  if (path === "/work")    return { page: "work",    workId: null };
+  if (path.startsWith("/work/")) return { page: "work", workId: path.replace("/work/", "") };
+  return { page: "home", workId: null };
+}
+
 export default function App() {
-  const [page, setPage]   = useState("home"); // "home" | "work" | "about" | "contact"
-  const [workId, setWorkId] = useState(null);
+  const initial = parseRoute();
+  const [page, setPage]   = useState(initial.page);
+  const [workId, setWorkId] = useState(initial.workId);
   const [unlocked, setUnlocked] = useState(false);
 
   const go = (target) => {
-    window.history.pushState({ page: target, workId: null }, "");
+    const path = target === "home" ? `${BASE}/` : `${BASE}/${target}`;
+    window.history.pushState({ page: target, workId: null }, "", path);
     setWorkId(null);
     setPage(target);
     if (target !== "work") setUnlocked(false);
@@ -876,18 +890,18 @@ export default function App() {
   };
 
   const goWork = (id) => {
-    window.history.pushState({ page: "work", workId: id }, "");
-    setWorkId(id);
+    const path = id ? `${BASE}/work/${id}` : `${BASE}/work`;
+    window.history.pushState({ page: "work", workId: id ?? null }, "", path);
+    setWorkId(id ?? null);
     setPage("work");
     window.scrollTo({ top:0, behavior:"smooth" });
   };
 
   useEffect(() => {
-    const onPop = (e) => {
-      const state = e.state;
-      if (!state) return;
-      setPage(state.page);
-      setWorkId(state.workId ?? null);
+    const onPop = () => {
+      const { page, workId } = parseRoute();
+      setPage(page);
+      setWorkId(workId);
       window.scrollTo({ top:0, behavior:"smooth" });
     };
     window.addEventListener("popstate", onPop);
