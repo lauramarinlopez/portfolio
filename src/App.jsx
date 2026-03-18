@@ -913,7 +913,7 @@ export default function App() {
       <style>{G}</style>
       <Nav/>
       {page === "home"    && <HomePage/>}
-      {page === "work"    && (unlocked ? <WorkPage/> : <PasswordGate onUnlock={()=>setUnlocked(true)}/>)}
+      {page === "work"    && <WorkPage/>}
       {page === "about"   && <AboutPage/>}
       {page === "contact" && <ContactPage/>}
     </RouterContext.Provider>
