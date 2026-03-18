@@ -515,7 +515,7 @@ const CASE_STUDIES = [
           "/portfolio/napster/napster-companion-1.png",
           "/portfolio/napster/napster-companion-2.png",
         ],
-        columns:2, gap:18, borderRadius:12,
+        columns:2, gap:18, borderRadius:12, mobileCols:1,
       },
       {
         label:"Design system",
