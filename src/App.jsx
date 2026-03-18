@@ -880,6 +880,7 @@ const EXPERIENCE = [
 
 function AboutPage() {
   const { go } = useRouter();
+  const isMobile = useIsMobile();
   const a = (d) => ({ opacity:0, animation:`fadeUp 0.7s ease ${d}s forwards` });
 
   return (
@@ -978,7 +979,7 @@ function AboutPage() {
         <Reveal><h2 style={{ fontFamily:"'Playfair Display',Georgia,serif",fontStyle:"italic",fontWeight:400,fontSize:"clamp(32px,4vw,52px)",color:C.ink,marginBottom:56 }}>Experience</h2></Reveal>
         {EXPERIENCE.map((exp,i)=>(
           <Reveal key={i} delay={i*0.07}>
-            <div style={{ display:"grid",gridTemplateColumns:"200px 1fr",gap:40,paddingBottom:i<EXPERIENCE.length-1?48:0,borderBottom:i<EXPERIENCE.length-1?`1px solid ${C.pill}`:"none",marginBottom:i<EXPERIENCE.length-1?48:0 }}>
+            <div style={{ display:"grid",gridTemplateColumns:isMobile?"1fr":"200px 1fr",gap:isMobile?12:40,paddingBottom:i<EXPERIENCE.length-1?48:0,borderBottom:i<EXPERIENCE.length-1?`1px solid ${C.pill}`:"none",marginBottom:i<EXPERIENCE.length-1?48:0 }}>
               <div>
                 <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,marginBottom:4 }}>{exp.period}</p>
                 <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:500,color:C.accent }}>{exp.company}</p>
