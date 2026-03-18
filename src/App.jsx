@@ -544,10 +544,10 @@ const CASE_STUDIES = [
       },
     ],
     impact:[
-      { color:"#6A4A9A", text:"Designed a seamless artist onboarding flow from sign-up through first console experience" },
-      { color:"#4A7B9D", text:"Built a modular console architecture that adapts across artist, label, and admin roles" },
-      { color:"#A0522D", text:"Delivered rich interactive experiences across both web and mobile console interfaces" },
+      { color:"#6A4A9A", text:"Designed a seamless onboarding flow from sign-up through first console experience" },
+      { color:"#4A7B9D", text:"Fostered collaboration between design and marketing to create stunning visuals" },
       { color:"#6A8A5A", text:"Established a scalable visual system that extended the Napster brand to a creator-facing product" },
+      { color:"#A0522D", text:"Introduced a completely new look as the product went from beta to full public release" },
     ],
   },
 ];
