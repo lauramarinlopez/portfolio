@@ -507,7 +507,7 @@ const CASE_STUDIES = [
           "/portfolio/napster/napster-chatbot-3.png",
           "/portfolio/napster/napster-chatbot-4.png",
         ],
-        columns:2, gap:18, borderRadius:12,
+        columns:2, gap:18, borderRadius:12, mobileCols:1,
       },
       {
         label:"Costumer Companion",
