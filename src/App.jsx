@@ -223,7 +223,7 @@ function Nav() {
               style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,fontWeight:600,color:C.muted,textDecoration:"none",transition:"color 0.2s" }}
               onMouseEnter={e=>e.currentTarget.style.color=C.ink}
               onMouseLeave={e=>e.currentTarget.style.color=C.muted}>
-              Resume ↗
+              Resume
             </a>
           </div>
         ) : (
@@ -255,7 +255,7 @@ function Nav() {
           ))}
           <a href="/portfolio/resume.pdf" target="_blank" rel="noreferrer" onClick={()=>setMenuOpen(false)}
             style={{ ...menuLinkStyle, color:C.muted }}>
-            Resume ↗
+            Resume
           </a>
         </div>
       )}
