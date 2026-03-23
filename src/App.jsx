@@ -877,7 +877,7 @@ const VALUES = [
 ];
 const EXPERIENCE = [
   { company:"Disney Streaming",               role:"Product Designer",                  period:"May 2021–Present", desc:"Design and prototype high-fidelity living room, mobile, and web experiences for Disney+, Hulu, and ESPN+ — spanning motion systems, design infrastructure, AI-powered prototyping workflows, and marquee in-app moments for 131M+ subscribers globally." },
-  { company:"Napster (formerly Infinite Reality)", role:"Product Designer (Contract)",   period:"Sep 2025–Sep 2026",         desc:"Designed rich interactive experiences for Napster's web and mobile platforms. Built design systems with 100+ unified components for Napster Spaces and Companion. Worked directly with the CTO on a complete brand redesign." },
+  { company:"Napster (formerly Infinite Reality)", role:"Product Designer (Contract)",   period:"Sep 2024–Sep 2025",         desc:"Designed rich interactive experiences for Napster's web and mobile platforms. Built design systems with 100+ unified components for Napster Spaces and Companion. Worked directly with the CTO on a complete brand redesign." },
   { company:"Anywhere",                       role:"Full-Stack UX Designer (Contract)", period:"Mar 2022–Mar 2023", desc:"Led mobile and web UX for multiple B2B products used by 49,000+ agents across Anywhere's brand portfolio. Designed a mobile onboarding experience now deployed to 200,000+ agents." },
 ];
 
